@@ -19,7 +19,7 @@ fun BottomNavGraph(navController: NavHostController, paddingValues: PaddingValue
         startDestination = BottomScreen.Timeline.route,
         route = BOTTOM_SCREEN_NAV_GRAPH_ROUTE
     ) {
-        composable(BottomScreen.User.route){ UserScreen(paddingValues = paddingValues) }
+        composable(BottomScreen.User.route){ UserScreen(navController = navController, paddingValues = paddingValues) }
         composable(BottomScreen.Dashboard.route){ DashboardScreen(paddingValues = paddingValues) }
         composable(BottomScreen.Timeline.route){ TimelineScreen(paddingValues = paddingValues) }
         composable(BottomScreen.Chats.route){ ChatsNavGraph(paddingValues = paddingValues) }

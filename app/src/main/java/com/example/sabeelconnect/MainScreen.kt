@@ -56,26 +56,27 @@ fun BottomBar(navController: NavHostController){
         BottomScreen.Timeline,
         BottomScreen.Chats
     )
-    
-    val width = listOf(
-        0.25f, 0.3333f, 0.5f, 1f
-    )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomNavigation(modifier = Modifier
-        .height(120.dp)
-        .background(Color.White)
-        ) {
-        screens.forEachIndexed{ index, screen ->
-            AddItem(screen = screen, currentDestination = currentDestination, navController = navController, width[index])
+    if (currentDestination != null) {
+        if(currentDestination.route != screens[0].route){
+            BottomNavigation(modifier = Modifier
+                .height(75.dp)
+                .background(Color.White)
+            ) {
+                screens.forEach{ screen ->
+                    AddItem(screen = screen, currentDestination = currentDestination, navController = navController)
+                }
+            }
         }
+
     }
 }
 
 @Composable
-fun RowScope.AddItem(screen: BottomScreen, currentDestination: NavDestination?, navController: NavHostController, width: Float){
+fun RowScope.AddItem(screen: BottomScreen, currentDestination: NavDestination?, navController: NavHostController){
     val isSelected = currentDestination?.hierarchy?.any { it.route == screen.route }
     currentDestination?.hierarchy?.let {
         BottomNavigationItem(
