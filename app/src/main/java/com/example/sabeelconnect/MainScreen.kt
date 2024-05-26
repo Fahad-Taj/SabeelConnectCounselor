@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -53,7 +54,7 @@ fun BottomBar(navController: NavHostController){
     val screens = listOf(
         BottomScreen.User,
         BottomScreen.Dashboard,
-        BottomScreen.Timeline,
+        //BottomScreen.Timeline,
         BottomScreen.Chats
     )
 
@@ -61,7 +62,7 @@ fun BottomBar(navController: NavHostController){
     val currentDestination = navBackStackEntry?.destination
 
     if (currentDestination != null) {
-        if(currentDestination.route != screens[0].route){
+        if(currentDestination.route != screens[0].route && currentDestination.route != screens[1].route){
             BottomNavigation(modifier = Modifier
                 .height(75.dp)
                 .background(Color.White)
@@ -80,7 +81,9 @@ fun RowScope.AddItem(screen: BottomScreen, currentDestination: NavDestination?, 
     val isSelected = currentDestination?.hierarchy?.any { it.route == screen.route }
     currentDestination?.hierarchy?.let {
         BottomNavigationItem(
-            modifier = Modifier.background(if (isSelected == true) PrimaryGreen else Color.White).padding(10.dp),
+            modifier = Modifier
+                .background(if (isSelected == true) PrimaryGreen else Color.White)
+                .padding(10.dp),
             label = {
                 Text(text = screen.title, fontSize = 9.sp, color = if(isSelected == true) Color.White else PrimaryGreen)
             },

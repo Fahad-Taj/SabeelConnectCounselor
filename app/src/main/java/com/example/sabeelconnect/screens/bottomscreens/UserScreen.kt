@@ -42,6 +42,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sabeelconnect.R
+import com.example.sabeelconnect.screens.BOTTOM_SCREEN_NAV_GRAPH_ROUTE
+import com.example.sabeelconnect.screens.BottomScreen
 import com.example.sabeelconnect.ui.theme.PrimaryGreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -116,8 +118,8 @@ fun UserScreen(navController: NavHostController, paddingValues: PaddingValues){
                 .border(0.5.dp, Color(0xFFCBCBCB)))
             Spacer(modifier = Modifier.height(27.dp))
 
-            UserScreenItems.allUserScreenItems.forEach{userScreenItem ->  
-                AddItem(userScreen = userScreenItem)
+            UserScreenItems.allUserScreenItems.forEachIndexed{index, userScreenItem ->
+                AddItem(navController, index, userScreen = userScreenItem)
                 Spacer(modifier = Modifier.height(12.dp))
             }
             
@@ -127,6 +129,8 @@ fun UserScreen(navController: NavHostController, paddingValues: PaddingValues){
 
 @Composable
 fun AddItem(
+    navController: NavHostController,
+    index: Int,
     userScreen: UserScreenItems
 ){
     Row(
@@ -145,7 +149,10 @@ fun AddItem(
         )
         Spacer(modifier = Modifier.width((59-userScreen.icon_width).dp))
         Column(
-            modifier = Modifier.fillMaxHeight()
+            modifier = Modifier
+                .fillMaxHeight()
+                .clickable { if(index >= 2 && index <= 5) navController.navigate(
+                    BottomScreen.Dashboard.route) else if (index == 6) navController.navigate("help_screen_route") }
         ) {
             Text(text = userScreen.title, fontSize = 15.sp, fontWeight = FontWeight(400))
             Spacer(modifier = Modifier.height(10.dp))

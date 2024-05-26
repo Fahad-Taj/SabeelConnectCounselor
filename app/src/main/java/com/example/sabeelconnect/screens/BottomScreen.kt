@@ -13,7 +13,7 @@ sealed class BottomScreen(
     object User: BottomScreen(
         route = "user_route",
         title = "User",
-        icon = R.drawable.user_vec
+        icon = R.drawable.user_vec_2
     )
     object Dashboard: BottomScreen(
         route = "dashboard_route",
