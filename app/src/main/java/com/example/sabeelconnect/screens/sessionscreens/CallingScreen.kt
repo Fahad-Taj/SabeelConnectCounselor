@@ -96,10 +96,15 @@ fun CallingScreen(navController: NavHostController){
                 painter = painterResource(id = R.drawable.answering_call_screen_user_img),
                 contentDescription = null
             )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(text = "User", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            
             Spacer(modifier = Modifier.height(400.dp))
-
+        
             Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 100.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 100.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Box(
