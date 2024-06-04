@@ -13,17 +13,14 @@ import com.example.sabeelconnect.screens.topscreens.GroupScreen
 import com.example.sabeelconnect.screens.topscreens.RequestedScreen
 
 @Composable
-fun ChatsNavGraph(chatNavController: NavHostController){
-
-
+fun ChatsNavGraph(rootNavController: NavHostController, chatNavController: NavHostController){
     NavHost(
         navController = chatNavController,
         startDestination = ChatScreen.All.route,
         route = CHATS_NAV_GRAPH_ROUTE
     ) {
-        composable(ChatScreen.All.route){ AllScreen(chatNavController = chatNavController) }
-        composable(ChatScreen.Group.route){ GroupScreen(chatNavController = chatNavController) }
-        composable(ChatScreen.Requested.route){ RequestedScreen(chatNavController = chatNavController) }
+        composable(ChatScreen.All.route){ AllScreen(rootNavController = rootNavController, chatNavController = chatNavController) }
+        composable(ChatScreen.Group.route){ GroupScreen(rootNavController = rootNavController, chatNavController = chatNavController) }
+        composable(ChatScreen.Requested.route){ RequestedScreen(rootNavController = rootNavController, chatNavController = chatNavController) }
     }
-
 }

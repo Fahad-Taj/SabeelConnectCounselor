@@ -40,12 +40,12 @@ import com.example.sabeelconnect.screens.BottomScreen
 import com.example.sabeelconnect.ui.theme.PrimaryGreen
 
 @Composable
-fun MainScreen(){
+fun MainScreen(rootNavController: NavHostController){
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { BottomBar(navController = navController) }
     ) {
-        BottomNavGraph(navController, it)
+        BottomNavGraph(rootNavController, navController, it)
     }
 }
 

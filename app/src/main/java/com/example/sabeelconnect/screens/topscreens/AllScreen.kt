@@ -38,7 +38,7 @@ import com.example.sabeelconnect.R
 import com.example.sabeelconnect.screens.ChatScreen
 
 @Composable
-fun AllScreen(chatNavController: NavHostController){
+fun AllScreen(rootNavController: NavHostController, chatNavController: NavHostController){
 
     LazyColumn(
         modifier = Modifier

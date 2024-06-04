@@ -42,6 +42,7 @@ import com.example.sabeelconnect.ui.theme.PrimaryGreen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScaffold(
+    rootNavController: NavHostController,
     paddingValues: PaddingValues
 ){
 
@@ -80,7 +81,7 @@ fun ChatScaffold(
             modifier = Modifier.padding(it)
         ) {
             TopNavBar(chatNavController)
-            ChatsNavGraph(chatNavController)
+            ChatsNavGraph(rootNavController, chatNavController)
         }
     }
 }

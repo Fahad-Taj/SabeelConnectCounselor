@@ -42,7 +42,7 @@ fun Box_Image(){
 }
 
 @Composable
-fun GroupScreen(chatNavController: NavHostController){
+fun GroupScreen(rootNavController: NavHostController, chatNavController: NavHostController){
 
     LazyColumn(
         modifier = Modifier

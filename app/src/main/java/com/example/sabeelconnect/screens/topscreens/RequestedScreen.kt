@@ -35,9 +35,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sabeelconnect.R
 import com.example.sabeelconnect.screens.ChatScreen
+import com.example.sabeelconnect.screens.SESSION_SCREEN_NAV_GRAPH_ROUTE
 
 @Composable
-fun RequestedScreen(chatNavController: NavHostController){
+fun RequestedScreen(rootNavController: NavHostController, chatNavController: NavHostController){
     LazyColumn(
     modifier = Modifier
         .fillMaxSize()
@@ -46,14 +47,14 @@ fun RequestedScreen(chatNavController: NavHostController){
         item { FilterBox() }
         item { Spacer(modifier = Modifier.height(9.dp)) }
         RequestedObjects.all_requested_objects.forEach{contact_object->
-            item { AddRequestedMainBoxItem(contact_object) }
+            item { AddRequestedMainBoxItem(rootNavController, chatNavController, contact_object) }
             item { Spacer(modifier = Modifier.height(12.dp)) }
         }
     }
 }
 
 @Composable
-fun AddRequestedMainBoxItem(contact_object: RequestedObjects){
+fun AddRequestedMainBoxItem(rootNavController: NavHostController, chatNavController: NavHostController, contact_object: RequestedObjects){
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -93,7 +94,7 @@ fun AddRequestedMainBoxItem(contact_object: RequestedObjects){
                         .clip(RoundedCornerShape(8.dp))
                         .background(Color(0xffefefef))
                         .border(1.dp, Color(0xff7b7b7b), RoundedCornerShape(8.dp))
-                        .clickable { },
+                        .clickable { rootNavController.navigate(SESSION_SCREEN_NAV_GRAPH_ROUTE) },
                     contentAlignment = Alignment.Center
                     ){
                     Text(text = "Requested", fontSize = 8.sp)
@@ -124,7 +125,7 @@ fun FilterBox(){
     }
 }
 
-sealed class RequestedObjects(
+ open class RequestedObjects(
     @DrawableRes val icon: Int,
     val name: String,
     val label: String
