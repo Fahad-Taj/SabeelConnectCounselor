@@ -61,7 +61,7 @@ fun AcceptanceScreen(navController: NavHostController){
                     )
                 },
                 title = {
-                    SessionTopAppBar(navController)
+                    SessionTopAppBar(navController, false)
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = PrimaryGreen
@@ -149,7 +149,7 @@ fun ButtonBox(color: Color, value: String, func: () -> Unit){
 }
 
 @Composable
-fun SessionTopAppBar(navController: NavHostController){
+fun SessionTopAppBar(navController: NavHostController, bool: Boolean){
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -173,8 +173,17 @@ fun SessionTopAppBar(navController: NavHostController){
                 Text(text = "tap here for group info", fontSize = 9.sp, color = Color.White)
             }
         }
-        Row(modifier = Modifier.padding(end = 15.dp)) {
-            Icon(modifier = Modifier.size(17.dp).clickable { navController.navigate(SessionScreen.CallingScreen.route) }, imageVector = Icons.Filled.Call, contentDescription = null, tint = Color.White)
+        if(bool == true){
+            Row(modifier = Modifier.padding(end = 15.dp)) {
+                Icon(modifier = Modifier
+                    .size(17.dp)
+                    .clickable { navController.navigate(SessionScreen.CallingScreen.route) }, imageVector = Icons.Filled.Call, contentDescription = null, tint = Color.White)
+            }
+        } else {
+            Row(modifier = Modifier.padding(end = 15.dp)) {
+                DropdownMenuExample()
+            }
+
         }
     }
 }
