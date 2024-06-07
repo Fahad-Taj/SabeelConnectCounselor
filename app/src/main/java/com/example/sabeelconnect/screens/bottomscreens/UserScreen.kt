@@ -76,6 +76,7 @@ fun UserScreen(navController: NavHostController, paddingValues: PaddingValues){
             modifier = Modifier
                 .padding(it)
                 .fillMaxSize()
+                .background(Color.White)
         ) {
             Spacer(modifier = Modifier.height(20.dp))
             Row(
