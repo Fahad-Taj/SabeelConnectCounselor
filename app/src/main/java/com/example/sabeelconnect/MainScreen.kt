@@ -7,10 +7,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
@@ -43,6 +47,7 @@ import com.example.sabeelconnect.ui.theme.PrimaryGreen
 fun MainScreen(rootNavController: NavHostController){
     val navController = rememberNavController()
     Scaffold(
+        modifier = Modifier.navigationBarsPadding(),
         bottomBar = { BottomBar(navController = navController) }
     ) {
         BottomNavGraph(rootNavController, navController, it)
@@ -66,6 +71,7 @@ fun BottomBar(navController: NavHostController){
             BottomNavigation(modifier = Modifier
                 .height(75.dp)
                 .background(Color.White)
+                .navigationBarsPadding(),
             ) {
                 screens.forEach{ screen ->
                     AddItem(screen = screen, currentDestination = currentDestination, navController = navController)
