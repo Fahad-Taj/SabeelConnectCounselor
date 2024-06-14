@@ -2,6 +2,7 @@ package com.example.sabeelconnect.uicomponents
 
 
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -20,10 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sabeelconnect.R
@@ -40,11 +44,14 @@ fun TextFieldComposable(
     placeholder: String,
     @DrawableRes image:  Int,
     function: (String) -> Unit,
-    keyboardOptions: KeyboardOptions
+    keyboardOptions: KeyboardOptions,
+    visualTransformation: VisualTransformation?=null,
+    @DrawableRes trailingImage: Int?=null
 ){
 
     var isSelected = remember { mutableStateOf(false) }
     var shouldShowPlaceholder = remember { mutableStateOf(true) }
+    var togglePasswordVisualTransformation = remember { mutableStateOf(true) }
 
     //This is the main Row and it will contain the image and the TextField
     Row(
@@ -66,6 +73,9 @@ fun TextFieldComposable(
             leadingIcon = {
                 Icon(modifier = Modifier.size(19.dp), painter = painterResource(id = image), contentDescription = null)
             },
+            trailingIcon = {
+                if(trailingImage != null) Icon(modifier = Modifier.size(19.dp).clickable { togglePasswordVisualTransformation.value = !togglePasswordVisualTransformation.value } ,imageVector = ImageVector.vectorResource(id = trailingImage), contentDescription = null)
+            },
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = Color.White,
                 focusedIndicatorColor = Color.Transparent,
@@ -82,7 +92,10 @@ fun TextFieldComposable(
                     color = Color.Black
                 )
             },
-            shape = RoundedCornerShape(17.dp)
+            shape = RoundedCornerShape(17.dp),
+            keyboardOptions = keyboardOptions,
+            visualTransformation = if(!(isSelected.value && parameter == "") && visualTransformation != null && togglePasswordVisualTransformation.value) visualTransformation else VisualTransformation.None,
+
         )
 
     }

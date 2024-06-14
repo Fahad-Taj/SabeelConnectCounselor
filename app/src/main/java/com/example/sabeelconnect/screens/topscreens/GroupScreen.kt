@@ -102,17 +102,17 @@ sealed class group_screen_element(
     val date: String,
 ){
     object obj1: group_screen_element(
-        contact_name = "User Group",
+        contact_name = "Counselor's Group",
         last_message = "You: Details",
         date = "19/06/24"
     )
     object obj2: group_screen_element(
-        contact_name = "Doctors",
+        contact_name = "Srinagar Group",
         last_message = "You: Details",
         date = "19/06/24"
     )
     object obj3: group_screen_element(
-        contact_name = "XYz Group",
+        contact_name = "NIBM Group",
         last_message = "You: Details",
         date = "19/06/24"
     )

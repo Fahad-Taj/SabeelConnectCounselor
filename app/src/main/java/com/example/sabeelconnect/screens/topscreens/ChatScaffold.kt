@@ -161,10 +161,10 @@ fun TopNavElement(
         )
 
 
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-            .background(PrimaryGreen))
+//        Box(modifier = Modifier
+//            .fillMaxWidth()
+//            .fillMaxHeight()
+//            .background(PrimaryGreen))
     }
 
 }

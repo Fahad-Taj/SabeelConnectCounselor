@@ -179,8 +179,8 @@ sealed class all_screen_element(
     object obj1: all_screen_element(
         icon = R.drawable.chat_all_object1_img,
         unseenStory = false,
-        contact_name = "XYZ Group",
-        last_message = "You: Details",
+        contact_name = "Islamic group",
+        last_message = "You: Alhumdulillah",
         date = "4:03 pm",
         pinned = true,
         unreadMessages = 0
@@ -188,8 +188,8 @@ sealed class all_screen_element(
     object obj2: all_screen_element(
         icon = R.drawable.chat_all_object2_img,
         unseenStory = true,
-        contact_name = "XYz Community",
-        last_message = "You: Details",
+        contact_name = "NIBM Group",
+        last_message = "You: Mashallah",
         date = "19/06/24",
         pinned = true,
         unreadMessages = 1
@@ -197,7 +197,7 @@ sealed class all_screen_element(
     object obj3: all_screen_element(
         icon = R.drawable.chat_all_object3_img,
         unseenStory = false,
-        contact_name = "WBC",
+        contact_name = "Dr. Yaseen Malik",
         last_message = "Doubt",
         date = "15/06/24",
         pinned = false,
@@ -206,7 +206,7 @@ sealed class all_screen_element(
     object obj4: all_screen_element(
         icon = R.drawable.chat_all_object4_img,
         unseenStory = false,
-        contact_name = "WBC Group",
+        contact_name = "Fawaz Ali Syed",
         last_message = "Class name?",
         date = "19/05/24",
         pinned = false,

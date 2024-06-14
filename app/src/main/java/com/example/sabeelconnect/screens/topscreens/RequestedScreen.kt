@@ -132,17 +132,17 @@ fun FilterBox(){
 ){
     object obj1: RequestedObjects(
         icon = R.drawable.chat_requested_object1_img,
-        name = "User_name",
+        name = "Syed Ali",
         label = "Type"
     )
     object obj2: RequestedObjects(
         icon = R.drawable.chat_requested_object2_img,
-        name = "User_name",
+        name = "Hussain Ahmad",
         label = "Details"
     )
     object obj3: RequestedObjects(
         icon = R.drawable.chat_requested_object3_img,
-        name = "User_name",
+        name = "Zubair Shaikh",
         label = "Details"
     )
     companion object{

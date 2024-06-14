@@ -5,6 +5,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -89,25 +90,25 @@ fun AnsweringCallScreen(navController: NavHostController){
                         .fillMaxWidth()
                         .height(87.dp)
                         .background(
-                            Color(0xff6e6d6d),
-                        )
-                        .clip(
-                            shape = RoundedCornerShape(
-                                topStart = 26.dp,
-                                topEnd = 26.dp,
-                                bottomStart = 0.dp,
-                                bottomEnd = 0.dp
-                            )
-                        )
-                        .background(
                             Color(0xff595959),
-                            RoundedCornerShape(
-                                topStart = 26.dp,
-                                topEnd = 26.dp,
-                                bottomStart = 0.dp,
-                                bottomEnd = 0.dp
-                            )
                         )
+//                        .clip(
+//                            shape = RoundedCornerShape(
+//                                topStart = 26.dp,
+//                                topEnd = 26.dp,
+//                                bottomStart = 0.dp,
+//                                bottomEnd = 0.dp
+//                            )
+//                        )
+//                        .background(
+//                            Color(0xff595959),
+////                            RoundedCornerShape(
+////                                topStart = 26.dp,
+////                                topEnd = 26.dp,
+////                                bottomStart = 0.dp,
+////                                bottomEnd = 0.dp
+////                            )
+//                        )
                         .padding(horizontal = 34.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
@@ -171,11 +172,11 @@ fun AnsweringCallScreen(navController: NavHostController){
                 .padding(top = 83.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "User", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Mohammad Sohail Abbas", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(33.dp))
             Image(
-                modifier = Modifier.size(140.dp),
-                painter = painterResource(id = R.drawable.answering_call_screen_user_img),
+                modifier = Modifier.size(140.dp).clip(CircleShape).border(1.dp, Color.White, CircleShape),
+                painter = painterResource(id = R.drawable.answering_call_screen_img),
                 contentDescription = null
             )
             Spacer(modifier = Modifier.height(40.dp))

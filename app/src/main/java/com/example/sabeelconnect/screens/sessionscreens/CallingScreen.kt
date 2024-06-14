@@ -2,6 +2,7 @@ package com.example.sabeelconnect.screens.sessionscreens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -92,12 +93,13 @@ fun CallingScreen(navController: NavHostController){
             }
             Spacer(modifier = Modifier.height(20.dp))
             Image(
-                modifier = Modifier.size(90.dp),
-                painter = painterResource(id = R.drawable.answering_call_screen_user_img),
-                contentDescription = null
+                modifier = Modifier.size(90.dp).clip(CircleShape).border(1.dp, Color.White, CircleShape),
+                painter = painterResource(id = R.drawable.answering_call_screen_img),
+                contentDescription = null,
+
             )
             Spacer(modifier = Modifier.height(20.dp))
-            Text(text = "User", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Mohammad Sohail Abbas", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
             
             Spacer(modifier = Modifier.height(400.dp))
         

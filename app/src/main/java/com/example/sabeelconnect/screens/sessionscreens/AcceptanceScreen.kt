@@ -103,6 +103,7 @@ fun AcceptanceScreen(navController: NavHostController){
             modifier = Modifier
                 .padding(it)
                 .fillMaxSize()
+                .background(Color.White)
                 .padding(horizontal = 15.dp,)
         ) {
             item { Spacer(modifier = Modifier.height(29.dp)) }

@@ -30,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -44,6 +45,7 @@ fun SignUpScreen(navController: NavHostController){
     var password by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
+    var confirmPassword by remember{ mutableStateOf("") }
 
     val my_gradient = Brush.linearGradient(
         colors = listOf(
@@ -149,7 +151,27 @@ fun SignUpScreen(navController: NavHostController){
             placeholder = "Password",
             image = R.drawable.password_leading_icon,
             function = { password = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = PasswordVisualTransformation(),
+            trailingImage = R.drawable.chat_all_lock_vec
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        // Confirm Password text field composable
+
+        TextFieldComposable(
+            modifier = Modifier
+                .height(51.dp)
+                .width(274.dp)
+                .border(1.dp, placeholder_text, RoundedCornerShape(17.dp)),
+            parameter = confirmPassword,
+            placeholder = "Confirm Password",
+            image = R.drawable.password_leading_icon,
+            function = { confirmPassword = it },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = PasswordVisualTransformation(),
+            trailingImage = R.drawable.chat_all_lock_vec
         )
 
         Spacer(modifier = Modifier.height(56.dp))

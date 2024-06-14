@@ -35,10 +35,13 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sabeelconnect.R
+import com.example.sabeelconnect.navigation.MAIN_SCREEN_ROUTE
 import com.example.sabeelconnect.ui.theme.placeholder_text
 import com.example.sabeelconnect.ui.theme.primary_green
 import com.example.sabeelconnect.ui.theme.secondary_green
@@ -117,7 +120,9 @@ fun LoginScreen(navController: NavHostController){
             placeholder = "Enter your password",
             image = R.drawable.password_leading_icon,
             function = { password = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = PasswordVisualTransformation(),
+            trailingImage = R.drawable.chat_all_lock_vec
         )
 
         Spacer(modifier = Modifier.height(3.dp))
@@ -147,7 +152,7 @@ fun LoginScreen(navController: NavHostController){
                 .fillMaxWidth()
                 .height(38.dp)
                 .clip(RoundedCornerShape(27.dp)),
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(MAIN_SCREEN_ROUTE) },
             colors = ButtonDefaults.buttonColors( containerColor = primary_green )
         ) {
             Text(
