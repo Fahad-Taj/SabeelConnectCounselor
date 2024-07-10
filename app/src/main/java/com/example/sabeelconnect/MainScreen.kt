@@ -39,9 +39,9 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.sabeelconnect.navigation.BottomNavGraph
-import com.example.sabeelconnect.screens.BottomScreen
-import com.example.sabeelconnect.ui.theme.PrimaryGreen
+import com.example.sabeelconnect.presentation.navigation.BottomNavGraph
+import com.example.sabeelconnect.presentation.screens.BottomScreen
+import com.example.sabeelconnect.presentation.ui.theme.PrimaryGreen
 
 @Composable
 fun MainScreen(rootNavController: NavHostController){
@@ -57,10 +57,10 @@ fun MainScreen(rootNavController: NavHostController){
 @Composable
 fun BottomBar(navController: NavHostController){
     val screens = listOf(
-        BottomScreen.User,
-        BottomScreen.Dashboard,
+        com.example.sabeelconnect.presentation.screens.BottomScreen.User,
+        com.example.sabeelconnect.presentation.screens.BottomScreen.Dashboard,
         //BottomScreen.Timeline,
-        BottomScreen.Chats
+        com.example.sabeelconnect.presentation.screens.BottomScreen.Chats
     )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -83,7 +83,7 @@ fun BottomBar(navController: NavHostController){
 }
 
 @Composable
-fun RowScope.AddItem(screen: BottomScreen, currentDestination: NavDestination?, navController: NavHostController){
+fun RowScope.AddItem(screen: com.example.sabeelconnect.presentation.screens.BottomScreen, currentDestination: NavDestination?, navController: NavHostController){
     val isSelected = currentDestination?.hierarchy?.any { it.route == screen.route }
     currentDestination?.hierarchy?.let {
         BottomNavigationItem(

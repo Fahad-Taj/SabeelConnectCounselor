@@ -51,10 +51,6 @@ android {
 
 dependencies {
     implementation(libs.androidx.room.runtime.android)
-    //implementation(libs.androidx.material3.android)
-    val nav_version = "2.7.7"
-    implementation("androidx.compose.material:material:1.6.7")
-    implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -71,4 +67,25 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
+    // Kotlin coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+
+    // Viewmodel Lifecycle and LiveData
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.3")
+    implementation("androidx.compose.runtime:runtime-livedata:1.0.0")
+
+    // Datastore Preferences
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Navigation in Compose
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    // Material UI
+    implementation("androidx.compose.material:material:1.6.7")
+
 }

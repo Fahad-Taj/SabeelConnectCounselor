@@ -11,8 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.sabeelconnect.navigation.RootGraph
-import com.example.sabeelconnect.ui.theme.SabeelConnectTheme
+import com.example.sabeelconnect.presentation.navigation.RootGraph
+import com.example.sabeelconnect.presentation.ui.theme.SabeelConnectTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
