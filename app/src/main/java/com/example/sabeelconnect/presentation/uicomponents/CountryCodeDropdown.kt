@@ -35,12 +35,14 @@ import com.example.sabeelconnect.R
 @Composable
 fun CountryCodeDropdown(
     modifier: Modifier,
-    map: Map<String, Pair<String, Int>>
+    map: Map<String, Pair<String, Int>>,
+    selectedText: Pair<String, Pair<String, Int>>,
+    function: (Pair<String, Pair<String, Int>>) -> Unit
 ){
     var isExpanded by remember { mutableStateOf(false) }
-    var selectedText by remember {
-        mutableStateOf(Pair("Afghanistan", Pair("+93", R.drawable.flag_afghanistan)))
-    }
+//    var selectedText by remember {
+//        mutableStateOf(Pair("Afghanistan", Pair("+93", R.drawable.flag_afghanistan)))
+//    }
 
     var rotation by remember { mutableFloatStateOf(0f) }
 
@@ -91,7 +93,7 @@ fun CountryCodeDropdown(
                             Image(modifier = Modifier.size(25.dp), painter = painterResource(id = pair.second), contentDescription = null)
                         },
                         onClick = {
-                            selectedText = Pair(countryName, Pair(pair.first, pair.second))
+                            function(Pair(countryName, Pair(pair.first, pair.second)))
                             isExpanded = false
                             if(isExpanded) rotation = 180f
                             else rotation = 0f

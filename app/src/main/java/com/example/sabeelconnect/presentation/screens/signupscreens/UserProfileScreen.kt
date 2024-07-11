@@ -157,10 +157,10 @@ fun UserProfileScreen(navController: NavHostController){
             ){
                 Text(text = "Phone", color = Color(0xff9E9E9E), fontSize = 13.sp, fontWeight = FontWeight.Normal)
                 Row {
-                    CountryCodeDropdown(modifier = Modifier
-                        .width(90.dp)
-                        .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)), map = countryData)
-                    Spacer(modifier = Modifier.width(10.dp))
+//                    CountryCodeDropdown(modifier = Modifier
+//                        .width(90.dp)
+//                        .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)), map = countryData)
+//                    Spacer(modifier = Modifier.width(10.dp))
                     BasicTextField(
                         modifier = Modifier
                             .width(140.dp)

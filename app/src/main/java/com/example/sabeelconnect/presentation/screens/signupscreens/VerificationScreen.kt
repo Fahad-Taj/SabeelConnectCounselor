@@ -309,7 +309,7 @@ fun FocusRequesterTextField(
         modifier = Modifier
             .focusRequester(focusRequester)
             .width(41.dp)
-            .height(75.dp)
+            .height(60.dp)
             .border(1.dp, placeholder_text, RoundedCornerShape(12.dp)),
         value = value,
         onValueChange = {
