@@ -44,6 +44,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.sabeelconnect.R
 import com.example.sabeelconnect.presentation.navigation.MAIN_SCREEN_ROUTE
+import com.example.sabeelconnect.presentation.screens.SIGNUP_GRAPH_ROUTE
 import com.example.sabeelconnect.presentation.ui.theme.placeholder_text
 import com.example.sabeelconnect.presentation.ui.theme.primary_green
 import com.example.sabeelconnect.presentation.ui.theme.secondary_green
@@ -242,7 +243,7 @@ fun LoginScreen(navController: NavHostController){
                 .width(264.dp)
                 .background(secondary_green, RoundedCornerShape(27.dp))
                 .border(1.dp, primary_green, RoundedCornerShape(27.dp))
-                .clickable { navController.navigate("signUpScreen") },
+                .clickable { navController.navigate(SIGNUP_GRAPH_ROUTE) },
             contentAlignment = Alignment.Center
         ){
             Text(

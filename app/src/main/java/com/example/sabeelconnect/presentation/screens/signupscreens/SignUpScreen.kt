@@ -34,16 +34,21 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.sabeelconnect.R
 import com.example.sabeelconnect.models.SignUp.SignupRequest
 import com.example.sabeelconnect.presentation.screens.LoginSignUpScreen
 import com.example.sabeelconnect.presentation.ui.theme.placeholder_text
 import com.example.sabeelconnect.presentation.ui.theme.primary_green
+import com.example.sabeelconnect.presentation.uicomponents.CountryCodeDropdown
+import com.example.sabeelconnect.presentation.uicomponents.MyDropdownMenu
 import com.example.sabeelconnect.presentation.uicomponents.TextFieldComposable
+import com.example.sabeelconnect.presentation.uicomponents.countryData
 
 @Composable
 fun SignUpScreen(navController: NavHostController) {
@@ -56,6 +61,8 @@ fun SignUpScreen(navController: NavHostController) {
     val signupViewModel: SignupViewModel = viewModel()
     val response by signupViewModel.response.collectAsState()
     var buttonClicked by remember { mutableStateOf(false) }
+
+    var countryCode by remember{ mutableStateOf("") }
 
     val my_gradient = Brush.linearGradient(
         colors = listOf(
@@ -130,19 +137,32 @@ fun SignUpScreen(navController: NavHostController) {
         )
 
         Spacer(modifier = Modifier.height(20.dp))
+        
+        Row {
 
-        // Phone number text field composable
-        TextFieldComposable(
-            modifier = Modifier
-                .height(51.dp)
-                .width(274.dp)
-                .border(1.dp, placeholder_text, RoundedCornerShape(17.dp)),
-            parameter = phoneNumber,
-            placeholder = "xxxxx - xxxxx",
-            image = R.drawable.phone_leading_icon,
-            function = { phoneNumber = it },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-        )
+            CountryCodeDropdown(
+                function = { countryCode = it },
+                modifier = Modifier
+                .width(90.dp)
+                .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp))
+                .background(Color.White, RoundedCornerShape(9.dp)),
+                map = countryData
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            // Phone number text field composable
+            TextFieldComposable(
+                modifier = Modifier
+                    .height(51.dp)
+                    .width(164.dp)
+                    .border(1.dp, placeholder_text, RoundedCornerShape(17.dp)),
+                parameter = phoneNumber,
+                placeholder = "Phone number",
+                image = null,
+                function = { phoneNumber = it },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            )
+        }
+        
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -230,4 +250,10 @@ fun SignUpScreen(navController: NavHostController) {
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun SignUpScreenPreview(){
+    SignUpScreen(navController = rememberNavController())
 }

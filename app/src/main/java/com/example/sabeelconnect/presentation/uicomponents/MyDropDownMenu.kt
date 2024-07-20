@@ -34,7 +34,10 @@ import com.example.sabeelconnect.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyDropdownMenu(modifier: Modifier, list: List<String>){
+fun MyDropdownMenu(
+    function: (String) -> Unit,
+    modifier: Modifier, list: List<String>)
+{
 
     var isExpanded by remember { mutableStateOf(false) }
     var selectedText by remember { mutableStateOf(list[0]) }
@@ -94,6 +97,7 @@ fun MyDropdownMenu(modifier: Modifier, list: List<String>){
                         )) },
                         onClick = {
                             selectedText = list[index]
+                            function(list[index])
                             isExpanded = false
                             if(isExpanded) rotation = 180f
                             else rotation = 0f

@@ -34,6 +34,7 @@ import com.example.sabeelconnect.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CountryCodeDropdown(
+    function: (String) -> Unit,
     modifier: Modifier,
     map: Map<String, Pair<String, Int>>
 ){
@@ -92,6 +93,7 @@ fun CountryCodeDropdown(
                         },
                         onClick = {
                             selectedText = Pair(countryName, Pair(pair.first, pair.second))
+                            function(selectedText.second.first)
                             isExpanded = false
                             if(isExpanded) rotation = 180f
                             else rotation = 0f

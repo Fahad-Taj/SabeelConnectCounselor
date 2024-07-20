@@ -1,6 +1,7 @@
 package com.example.sabeelconnect.presentation.screens.loginscreens
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sabeelconnect.api.RetrofitInstance
@@ -23,11 +24,13 @@ class LoginScreenViewModel: ViewModel(){
                 if (result.isSuccessful) {
 
                 }
+                Log.e("Login Response", response.value?.body().toString())
+                Log.e("Login Response", response.value?.errorBody().toString())
+                Log.e("Login Response", response.value?.code().toString())
 
             } catch (e: Exception) {
                 // Handle exception
             }
         }
     }
-
 }

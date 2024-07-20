@@ -42,7 +42,7 @@ fun TextFieldComposable(
     modifier: Modifier,
     parameter: String,
     placeholder: String,
-    @DrawableRes image:  Int,
+    @DrawableRes image:  Int? = null,
     function: (String) -> Unit,
     keyboardOptions: KeyboardOptions,
     visualTransformation: VisualTransformation?=null,
@@ -56,7 +56,6 @@ fun TextFieldComposable(
     //This is the main Row and it will contain the image and the TextField
     Row(
         modifier = modifier,
-
         ){
 
         TextField(
@@ -70,12 +69,10 @@ fun TextFieldComposable(
                 placeholder
             else parameter,
             onValueChange = { function(it) },
-            leadingIcon = {
-                Icon(modifier = Modifier.size(19.dp), painter = painterResource(id = image), contentDescription = null)
+            leadingIcon ={
+                if(image != null)  Icon(modifier = Modifier.size(19.dp), painter = painterResource(id = image), contentDescription = null)
             },
-            trailingIcon = {
-                if(trailingImage != null) Icon(modifier = Modifier.size(19.dp).clickable { togglePasswordVisualTransformation.value = !togglePasswordVisualTransformation.value } ,imageVector = ImageVector.vectorResource(id = trailingImage), contentDescription = null)
-            },
+
             colors = TextFieldDefaults.textFieldColors(
                 containerColor = Color.White,
                 focusedIndicatorColor = Color.Transparent,
