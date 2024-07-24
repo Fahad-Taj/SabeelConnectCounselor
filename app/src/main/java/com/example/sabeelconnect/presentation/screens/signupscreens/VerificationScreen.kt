@@ -1,6 +1,7 @@
 package com.example.sabeelconnect.presentation.screens.signupscreens
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -40,6 +41,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -70,8 +72,10 @@ fun VerificationScreen(navController: NavHostController){
     )
 
     var otp by remember { mutableStateOf("") }
+    val context = LocalContext.current
     val verifynumberviewmodel: VerifyNumberViewModel = viewModel()
     val response by verifynumberviewmodel.response.collectAsState()
+
     var buttonClicked by remember {
         mutableStateOf(false)
     }
@@ -280,6 +284,7 @@ fun VerificationScreen(navController: NavHostController){
 
         LaunchedEffect(response) {
             response?.let {
+                Toast.makeText(context, response!!.message().toString(), Toast.LENGTH_SHORT).show()
                 Log.e("Verification Response", it.message().toString())
                 Log.e("Verification Response", it.body().toString())
                 Log.e("Verification Response", it.errorBody()?.string().toString())
@@ -309,7 +314,7 @@ fun FocusRequesterTextField(
         modifier = Modifier
             .focusRequester(focusRequester)
             .width(41.dp)
-            .height(75.dp)
+            .height(60.dp)
             .border(1.dp, placeholder_text, RoundedCornerShape(12.dp)),
         value = value,
         onValueChange = {

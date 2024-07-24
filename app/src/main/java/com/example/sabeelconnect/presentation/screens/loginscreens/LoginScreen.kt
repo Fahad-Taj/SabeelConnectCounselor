@@ -1,5 +1,6 @@
 package com.example.sabeelconnect.presentation.screens.loginscreens
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -31,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -53,10 +55,16 @@ import com.example.sabeelconnect.presentation.uicomponents.TextFieldComposable
 @Composable
 fun LoginScreen(navController: NavHostController){
 
+
+    // Viewmodel variables begins ------------------------------------------------------------------
     val loginViewModel: LoginScreenViewModel = viewModel()
+    val response by loginViewModel.response.collectAsState()
+    // Viewmodel variables end ---------------------------------------------------------------------
+
+    // State variables begin -----------------------------------------------------------------------
     var name by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    val response by loginViewModel.response.collectAsState()
+    val context = LocalContext.current
 
     val my_gradient = Brush.linearGradient(
         colors = listOf(
@@ -69,8 +77,10 @@ fun LoginScreen(navController: NavHostController){
     var buttonClicked by remember {
         mutableStateOf(false)
     }
+    // State variables ends ------------------------------------------------------------------------
 
-    // Main Column, it will occupy the complete space and will have our gradient
+    // Main Column, it will occupy the complete space and will have our gradient -------------------
+    // Parent
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -79,7 +89,7 @@ fun LoginScreen(navController: NavHostController){
         horizontalAlignment = Alignment.CenterHorizontally
     ){
 
-        // Logo present at the top
+        // Logo present at the top -----------------------------------------------------------------
         Image(
             modifier = Modifier
                 .width(104.dp)
@@ -90,7 +100,7 @@ fun LoginScreen(navController: NavHostController){
 
         Spacer(modifier = Modifier.height(35.dp))
 
-        // Welcome Text
+        // Welcome Text ----------------------------------------------------------------------------
         Text(
             fontFamily = FontFamily(
                 Font(R.font.inter_medium)
@@ -101,7 +111,8 @@ fun LoginScreen(navController: NavHostController){
 
         Spacer(modifier = Modifier.height(67.dp))
 
-        // Name TextField
+        // Name TextField --------------------------------------------------------------------------
+        // Contains the name state variable
         TextFieldComposable(
             modifier = Modifier
                 .fillMaxWidth()
@@ -117,7 +128,8 @@ fun LoginScreen(navController: NavHostController){
 
         Spacer(modifier = Modifier.height(25.dp))
 
-        // Password TextField
+        // Password TextField ----------------------------------------------------------------------
+        // Contains the password state variable
         TextFieldComposable(
             modifier = Modifier
                 .fillMaxWidth()
@@ -135,7 +147,8 @@ fun LoginScreen(navController: NavHostController){
 
         Spacer(modifier = Modifier.height(3.dp))
 
-        //Forgot Password Text which is also clickable, it is wrapped inside a Row
+        // Forgot Password Text which is also clickable, it is wrapped inside a Row ----------------
+        // This button will navigate to a different screen
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
@@ -154,15 +167,20 @@ fun LoginScreen(navController: NavHostController){
 
         Spacer(modifier = Modifier.height(21.dp))
 
-        // Login Button
+        // Login Button ----------------------------------------------------------------------------
+        // Clicking on this button will call the viewmodel function to hit api endpoint will our data.
         Button(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(38.dp)
                 .clip(RoundedCornerShape(27.dp)),
             onClick = {
-                loginViewModel.login(name, password)
-                buttonClicked = true
+                if(name != "" && password != ""){
+                    loginViewModel.login(name, password)
+                    buttonClicked = true
+                } else if(name == ""){
+                    Toast.makeText(context, "Name cannot be empty", Toast.LENGTH_SHORT).show()
+                } else if(password == "") Toast.makeText(context, "Password cannot be empty", Toast.LENGTH_SHORT).show()
                       },
             colors = ButtonDefaults.buttonColors( containerColor = primary_green )
         ) {
@@ -257,6 +275,9 @@ fun LoginScreen(navController: NavHostController){
         Spacer(modifier = Modifier.height(20.dp))
 
         response.let {
+            response?.let {
+                Toast.makeText(context, response!!.message().toString(), Toast.LENGTH_SHORT).show()
+            }
             if(response?.isSuccessful != true && buttonClicked){
                 Text(text = "Invalid credentials", fontSize = 12.sp, color = Color.Red)
             } else if(response?.isSuccessful == true && buttonClicked){
@@ -265,6 +286,5 @@ fun LoginScreen(navController: NavHostController){
 
             }
         }
-
     }
 }

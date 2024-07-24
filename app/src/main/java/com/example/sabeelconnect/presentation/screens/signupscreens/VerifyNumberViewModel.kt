@@ -21,10 +21,13 @@ class VerifyNumberViewModel: ViewModel(){
         viewModelScope.launch {
             try {
                 val bearerToken = "Bearer $access_token"
-                Log.e("Check verify number function", bearerToken.toString() + "  " + otp)
                 val result = RetrofitInstance.api.verifynumber(bearerToken, VerifyNumberRequest(otp))
                 _response.value = result
+
+                Log.e("Response from verify number", result.toString())
                 Log.e("Response from verify Number - 1", result.message())
+                Log.e("Check verify number function", bearerToken.toString() + "  " + otp)
+
                 if (result.isSuccessful) {
                     Log.e("Response from verify Number - 2", result.message())
                 }

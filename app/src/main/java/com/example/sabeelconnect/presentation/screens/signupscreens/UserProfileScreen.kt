@@ -1,6 +1,7 @@
 package com.example.sabeelconnect.presentation.screens.signupscreens
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -37,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -48,6 +50,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.sabeelconnect.R
+import com.example.sabeelconnect.api.access_token
 import com.example.sabeelconnect.models.CreateProfile.CompleteProfileRequest
 import com.example.sabeelconnect.presentation.screens.LoginSignUpScreen
 import com.example.sabeelconnect.presentation.uicomponents.CountryCodeDropdown
@@ -58,30 +61,30 @@ import com.example.sabeelconnect.presentation.uicomponents.countryData
 @Composable
 fun UserProfileScreen(navController: NavHostController){
 
+    // State variables -----------------------------------------------------------------------------
+    // Majority of the state variables can be collapsed into a single request object, I will implement
+    // it later.
     val scrollState = rememberScrollState()
     var name by remember { mutableStateOf("") }
     var phone_number_user by remember { mutableStateOf("") }
-    var gender by remember { mutableStateOf("") }
+    var gender by remember { mutableStateOf("Male") }
     var expanded by remember { mutableStateOf(false) }
     var selectedOption by remember { mutableStateOf("Option 1") }
-    var religiousEducation by remember{ mutableStateOf("") }
+    var religiousEducation by remember{ mutableStateOf("Aalema") }
     val options = listOf("Option 1", "Option 2")
     var age by remember { mutableStateOf(18) }
+    var email by remember{ mutableStateOf("") }
+    var country by remember {mutableStateOf("Aruba")}
+    var state by remember {mutableStateOf("Canillo")}
 
-    var country by remember {mutableStateOf("India")}
-    var state by remember {mutableStateOf("Kashmir")}
+    var countryCode by remember { mutableStateOf("+91") }
+    var prefferedLanguage by remember{ mutableStateOf("English") }
+    var highestEducation by remember{ mutableStateOf("10th") }
+    var specialtyAreas by remember{ mutableStateOf("General") }
+    var languagesSpoken by remember{ mutableStateOf("English") }
 
-    var countryCode by remember { mutableStateOf("") }
-    var prefferedLanguage by remember{ mutableStateOf("") }
-    var highestEducation by remember{ mutableStateOf("") }
-    var specialtyAreas by remember{ mutableStateOf("") }
-    var languagesSpoken by remember{ mutableStateOf("") }
-
-    val userProfileViewModel: UserProfileViewModel = viewModel()
-    val response by userProfileViewModel.response.collectAsState()
-
-   var buttonClicked by remember{ mutableStateOf(false) }
-
+    var buttonClicked by remember{ mutableStateOf(false) }
+    val context = LocalContext.current
     val my_gradient = Brush.linearGradient(
         colors = listOf(
             Color(0xFFCDF8E1),
@@ -89,9 +92,39 @@ fun UserProfileScreen(navController: NavHostController){
             Color(0xFFD5EBF3)
         )
     )
+    // ---------------------------------------------------------------------------------------------
+
+    // Viewmodel variables -------------------------------------------------------------------------
+    val userProfileViewModel: UserProfileViewModel = viewModel()
+    val response by userProfileViewModel.response.collectAsState()
+
+    val infoResponse by userProfileViewModel.infoResponse.collectAsState()
+    // ---------------------------------------------------------------------------------------------
+
+    // Coroutine that will bring the values of name and phone number
+    // Fetch data from the backend
+    LaunchedEffect(Unit) {
+        userProfileViewModel.getCounselorInfo(token = access_token!!)
+    }
+
+    // Update state when infoResponse is available
+    LaunchedEffect(infoResponse) {
+        infoResponse?.let {
+            if (it.isSuccessful) {
+                val userData = it.body()?.data?.user
+                name = userData?.username ?: "No name"
+                phone_number_user = userData?.mobile_number ?: "No phone number"
+                // Update other state variables as needed
+            } else {
+                // Handle error case
+                name = "Error fetching name"
+                phone_number_user = "Error fetching phone number"
+            }
+        }
+    }
 
 
-
+    // Column which will contain the entire composable UI screen -----------------------------------
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -100,7 +133,7 @@ fun UserProfileScreen(navController: NavHostController){
             .verticalScroll(scrollState)
             .navigationBarsPadding()
     ) {
-        // Top part containing Image, Username and Change profile
+        // Top Row part containing Image, Username and Change profile ----------------------------------
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -129,7 +162,7 @@ fun UserProfileScreen(navController: NavHostController){
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(text = "Change profile", color = Color(0xff3E70BB), textDecoration = TextDecoration.Underline)
             }
-        } // Row ends here
+        } // Row ends here -----------------------------------------------------------------------------
 
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -141,7 +174,7 @@ fun UserProfileScreen(navController: NavHostController){
         Spacer(modifier = Modifier.height(10.dp))
 
 
-        //Top Box
+        //Top Box -----------------------------------------------------------------------------------
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -150,7 +183,7 @@ fun UserProfileScreen(navController: NavHostController){
                 .border(1.dp, Color(0xffBDBDBD), RoundedCornerShape(10.dp))
                 .padding(15.dp)
         ){
-            // Name Row
+            // Name Row-----------------------------------------------------------------------------
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -158,6 +191,7 @@ fun UserProfileScreen(navController: NavHostController){
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Text(text = "Name", color = Color(0xff9E9E9E), fontSize = 12.sp, fontWeight = FontWeight.Normal)
+                // Name text field, name state variable present here -------------------------------
                 BasicTextField(
                     modifier = Modifier
                         .width(240.dp)
@@ -166,7 +200,7 @@ fun UserProfileScreen(navController: NavHostController){
                         .padding(10.dp),
                     value = name,
                     onValueChange = {
-                        name = it
+                        // name = it
                     },
                     singleLine = true
                 )
@@ -183,21 +217,31 @@ fun UserProfileScreen(navController: NavHostController){
             ){
                 Text(text = "Phone", color = Color(0xff9E9E9E), fontSize = 13.sp, fontWeight = FontWeight.Normal)
                 Row {
-                    CountryCodeDropdown(
-                        function = { countryCode = it },
-                        modifier = Modifier
-                        .width(90.dp)
-                        .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)), map = countryData)
-                    Spacer(modifier = Modifier.width(10.dp))
+                    // Country Code DropDown, it is currently disabled. I will enable it later --------------
+//                    CountryCodeDropdown(
+//                        function = { countryCode = it },
+//                        modifier = Modifier
+//                            .width(90.dp)
+//                            .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)),
+//                        map = countryData
+//                    )
+//                    Spacer(modifier = Modifier.width(10.dp))
+////                    CountryCodeDropdown(modifier = Modifier
+////                        .width(90.dp)
+////                        .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)), map = countryData)
+////                    Spacer(modifier = Modifier.width(10.dp))
+
+                    // Contains the actual phone number, it should occupy only 140.dp width ---------
+                    // Currently it is set to fillMaxWidth()
                     BasicTextField(
                         modifier = Modifier
-                            .width(140.dp)
+                            .fillMaxWidth()
                             .height(50.dp)
                             .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp))
                             .padding(vertical = 15.dp, horizontal = 10.dp),
                         value = phone_number_user,
                         onValueChange = {
-                            phone_number_user = it
+                            //phone_number_user = it
                         },
                         singleLine = true,
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
@@ -207,7 +251,30 @@ fun UserProfileScreen(navController: NavHostController){
             }
             Spacer(modifier = Modifier.height(15.dp))
 
-            //Gender and Age Row
+            // Email Row --------------------------------------------------------------------------
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(text = "Email", color = Color(0xff9E9E9E), fontSize = 12.sp, fontWeight = FontWeight.Normal)
+                BasicTextField(
+                    modifier = Modifier
+                        .width(240.dp)
+                        .height(40.dp)
+                        .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp))
+                        .padding(10.dp),
+                    value = email,
+                    onValueChange = {
+                        email = it
+                    },
+                    singleLine = true
+                )
+            }
+            Spacer(modifier = Modifier.height(15.dp))
+            // ---------------------------------------------------------------------------------------
+            //Gender and Age Row -------------------------------------------------------------------
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -223,8 +290,8 @@ fun UserProfileScreen(navController: NavHostController){
                     MyDropdownMenu(
                         function = { gender = it },
                         modifier = Modifier
-                        .width(100.dp)
-                        .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)),
+                            .width(100.dp)
+                            .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)),
                         list = listOf("Male", "Female"))
                 }
                 Row(
@@ -249,8 +316,8 @@ fun UserProfileScreen(navController: NavHostController){
                 }
             }
             Spacer(modifier = Modifier.height(15.dp))
-
-            // Country
+            // -------------------------------------------------------------------------------------
+            // Country ---------------------------------------------------------------------------
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
@@ -270,7 +337,7 @@ fun UserProfileScreen(navController: NavHostController){
             }
             Spacer(modifier = Modifier.height(15.dp))
 
-            // State
+            // State -------------------------------------------------------------------------------
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
@@ -290,9 +357,8 @@ fun UserProfileScreen(navController: NavHostController){
                     singleLine = true
                 )
             }
-
         }
-
+        // -----------------------------------------------------------------------------------------
         // Bottom Box
         Spacer(modifier = Modifier.height(25.dp))
         Column(
@@ -304,7 +370,7 @@ fun UserProfileScreen(navController: NavHostController){
                 .padding(15.dp)
         ){
 
-            //Preferred Language Row
+            //Preferred Language Row --------------------------------------------------------------
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -319,14 +385,14 @@ fun UserProfileScreen(navController: NavHostController){
                 MyDropdownMenu(
                     function = { prefferedLanguage = it },
                     modifier = Modifier
-                    .width(200.dp)
-                    .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)),
-                    list = listOf("Enlgish", "Urdu", "Kashmiri", "Arabic"))
+                        .width(200.dp)
+                        .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)),
+                    list = listOf("English", "Urdu", "Kashmiri", "Arabic"))
             }
             Spacer(modifier = Modifier.height(15.dp))
 
 
-            // Religion Education
+            // Religion Education ------------------------------------------------------------------
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -353,7 +419,7 @@ fun UserProfileScreen(navController: NavHostController){
             }
             Spacer(modifier = Modifier.height(15.dp))
 
-            // Highest Education Row
+            // Highest Education Row ---------------------------------------------------------------
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -368,13 +434,13 @@ fun UserProfileScreen(navController: NavHostController){
                 MyDropdownMenu(
                     function = { highestEducation = it },
                     modifier = Modifier
-                    .width(200.dp)
-                    .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)),
-                    list = listOf("10th", "12th", "Graduate", "Masters", "Doctorate", "Post-doctorate"))
+                        .width(200.dp)
+                        .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)),
+                    list = listOf("10th", "12th", "Graduate", "Masters", "PhD", "Post-doctorate"))
             }
             Spacer(modifier = Modifier.height(15.dp))
 
-            // Specialty Areas Row
+            // Specialty Areas Row -----------------------------------------------------------------
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -384,18 +450,17 @@ fun UserProfileScreen(navController: NavHostController){
                     modifier = Modifier.width(100.dp)
                 ){
                     Text(text = "Specialty Areas", color = Color(0xff9E9E9E), fontSize = 13.sp, fontWeight = FontWeight.Normal)
-
                 }
                 MyDropdownMenu(
                     function = {specialtyAreas = it},
                     modifier = Modifier
-                    .width(200.dp)
-                    .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)),
+                        .width(200.dp)
+                        .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)),
                     list = listOf("General", "Marriage", "Business", "Career and Lifestyle", "Hajj and Umrah", "Health and Fitness"))
             }
             Spacer(modifier = Modifier.height(15.dp))
 
-            // Languages Spoken Row
+            // Languages Spoken Row ----------------------------------------------------------------
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -410,8 +475,8 @@ fun UserProfileScreen(navController: NavHostController){
                 MyDropdownMenu(
                     function = { languagesSpoken = it },
                     modifier = Modifier
-                    .width(200.dp)
-                    .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)),
+                        .width(200.dp)
+                        .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(9.dp)),
                     list = listOf("English, Arabic, Urdu, Kashmiri", "English, Arabic, Urdu", "English, Urdu", "English, Kashmiri", "Kashmiri, Urdu", "English"))
             }
             Spacer(modifier = Modifier.height(15.dp))
@@ -419,7 +484,7 @@ fun UserProfileScreen(navController: NavHostController){
         }
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Save and Continue Button
+        // Save and Continue Button ----------------------------------------------------------------
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             Button(
                 modifier = Modifier
@@ -443,8 +508,10 @@ fun UserProfileScreen(navController: NavHostController){
                             religion = "Islam",
                             specialty_areas = specialtyAreas,
                             religious_education = religiousEducation,
+                            email = email
                         )
                     )
+
                 }
             ) {
                 Text(text = "Save and Continue", color = Color.White,)
@@ -458,6 +525,8 @@ fun UserProfileScreen(navController: NavHostController){
             Log.e("SignUp Response", it.body().toString())
             Log.e("SignUp Response", it.errorBody()?.string().toString())
             Log.e("SignUp Response", it.code().toString())
+
+            Toast.makeText(context, response!!.message().toString(), Toast.LENGTH_SHORT).show()
 
             if (buttonClicked && it.isSuccessful) {
                 navController.navigate(LoginSignUpScreen.CredentialsVerificationScreen.route)

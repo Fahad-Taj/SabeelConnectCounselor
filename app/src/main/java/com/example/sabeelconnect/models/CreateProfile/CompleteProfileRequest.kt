@@ -11,5 +11,6 @@ data class CompleteProfileRequest(
     val religion: String,
     val religious_education: String,
     val specialty_areas: String,
-    val state: String
+    val state: String,
+    val email: String
 )
