@@ -103,25 +103,25 @@ fun UserProfileScreen(navController: NavHostController){
 
     // Coroutine that will bring the values of name and phone number
     // Fetch data from the backend
-    LaunchedEffect(Unit) {
-        userProfileViewModel.getCounselorInfo(token = access_token!!)
-    }
+//    LaunchedEffect(Unit) {
+//        userProfileViewModel.getCounselorInfo(token = access_token!!)
+//    }
 
     // Update state when infoResponse is available
-    LaunchedEffect(infoResponse) {
-        infoResponse?.let {
-            if (it.isSuccessful) {
-                val userData = it.body()?.data?.user
-                name = userData?.username ?: "No name"
-                phone_number_user = userData?.mobile_number ?: "No phone number"
-                // Update other state variables as needed
-            } else {
-                // Handle error case
-                name = "Error fetching name"
-                phone_number_user = "Error fetching phone number"
-            }
-        }
-    }
+//    LaunchedEffect(infoResponse) {
+//        infoResponse?.let {
+//            if (it.isSuccessful) {
+//                val userData = it.body()?.data?.user
+//                name = userData?.username ?: "No name"
+//                phone_number_user = userData?.mobile_number ?: "No phone number"
+//                // Update other state variables as needed
+//            } else {
+//                // Handle error case
+//                name = "Error fetching name"
+//                phone_number_user = "Error fetching phone number"
+//            }
+//        }
+//    }
 
 
     // Column which will contain the entire composable UI screen -----------------------------------

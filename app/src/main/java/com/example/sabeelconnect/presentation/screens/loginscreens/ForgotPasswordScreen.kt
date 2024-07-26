@@ -37,6 +37,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -60,6 +61,7 @@ fun ForgotPasswordScreen(navController: NavHostController){
     var shouldShowPlaceholder by remember { mutableStateOf(false) }
     var phoneNumber by remember { mutableStateOf("") }
 
+    //Main Column which will contain the entire screen
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -72,7 +74,7 @@ fun ForgotPasswordScreen(navController: NavHostController){
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(39.dp),
+                .height(49.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -84,7 +86,7 @@ fun ForgotPasswordScreen(navController: NavHostController){
 //                    .width(10.dp)
 //                    .clickable { navController.navigate("loginScreen") },
 //                    painter = painterResource(id = R.drawable.back_icon), contentDescription = null)
-                Icon(Icons.Filled.ArrowBack, contentDescription = "Back", modifier = Modifier.height(17.dp).width(25.dp).clickable { navController.navigate("loginScreen") },)
+                Icon(Icons.Filled.ArrowBack, contentDescription = "Back", modifier = Modifier.height(19.dp).width(28.dp).clickable { navController.navigate("loginScreen") },)
 
             }
             // Box ends here
@@ -92,7 +94,7 @@ fun ForgotPasswordScreen(navController: NavHostController){
 
             //Text containing Forgot Password
             Text(
-                fontSize = 20.sp,
+                fontSize = 22.sp,
                 fontFamily = FontFamily(Font(R.font.inter_bold)),
                 text = "Forgot Password?"
             )
@@ -100,18 +102,17 @@ fun ForgotPasswordScreen(navController: NavHostController){
 
         // Top Row ends here
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
         // Main image
         Image(modifier = Modifier
-            .height(132.dp)
-            .width(123.dp),
+            .height(165.dp)
+            .width(153.75.dp),
             painter = painterResource(id = R.drawable.forgot_password_header_image), contentDescription = null)
 
-        Spacer(modifier = Modifier.height(19.dp))
+        Spacer(modifier = Modifier.height(27.dp))
 
         // Phone number TextField with placeholder text
-
         TextField(
             modifier = Modifier
                 .onFocusChanged {
@@ -120,8 +121,8 @@ fun ForgotPasswordScreen(navController: NavHostController){
                         shouldShowPlaceholder = true
                     } else shouldShowPlaceholder = false
                 }
-                .height(48.82.dp)
-                .width(237.dp)
+                .height(53.82.dp)
+                .width(267.dp)
                 .background(Color.White, RoundedCornerShape(17.dp))
                 .border(1.dp, placeholder_text, RoundedCornerShape(17.dp)),
             colors = TextFieldDefaults.textFieldColors(
@@ -136,13 +137,15 @@ fun ForgotPasswordScreen(navController: NavHostController){
             },
             textStyle = if (shouldShowPlaceholder) {
                 TextStyle(
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
                     fontFamily = FontFamily(Font(R.font.inter_medium)),
                     color = placeholder_text
                 )
             } else {
                 TextStyle(
                     fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
                     fontFamily = FontFamily(Font(R.font.inter_medium)),
                     color = Color.Black
                 )
@@ -158,15 +161,16 @@ fun ForgotPasswordScreen(navController: NavHostController){
 
         Box(
             modifier = Modifier
-                .height(37.dp)
-                .width(126.dp)
-                .background(primary_green, RoundedCornerShape(17.dp))
+                .height(47.dp)
+                .width(136.dp)
+                .background(primary_green, RoundedCornerShape(19.dp))
                 .clickable { },
             contentAlignment = Alignment.Center
         ){
             Text(
                 text = "Submit",
-                fontSize = 12.sp,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold,
                 fontFamily = FontFamily(Font(R.font.inter_medium)),
                 color = Color.White
             )

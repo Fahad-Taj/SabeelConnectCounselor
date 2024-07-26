@@ -12,7 +12,7 @@ import com.example.sabeelconnect.presentation.screens.signupscreens.UserProfileS
 import com.example.sabeelconnect.presentation.screens.signupscreens.VerificationScreen
 
 fun NavGraphBuilder.signUpGraph(navController: NavHostController){
-    navigation(startDestination = com.example.sabeelconnect.presentation.screens.LoginSignUpScreen.SignUpScreen.route, route = com.example.sabeelconnect.presentation.screens.SIGNUP_GRAPH_ROUTE){
+    navigation(startDestination = com.example.sabeelconnect.presentation.screens.LoginSignUpScreen.UserProfileScreen.route, route = com.example.sabeelconnect.presentation.screens.SIGNUP_GRAPH_ROUTE){
         composable(com.example.sabeelconnect.presentation.screens.LoginSignUpScreen.SignUpScreen.route){
             SignUpScreen(navController = navController)
         }

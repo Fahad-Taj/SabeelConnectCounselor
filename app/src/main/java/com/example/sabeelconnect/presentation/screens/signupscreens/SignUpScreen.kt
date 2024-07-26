@@ -12,10 +12,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -42,6 +44,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -97,7 +100,7 @@ fun SignUpScreen(navController: NavHostController) {
         modifier = Modifier
             .fillMaxSize()
             .background(brush = my_gradient)
-            .padding(top = 84.dp),
+            .padding(top = 84.dp, start = 43.dp, end = 43.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // UI components...
@@ -105,8 +108,8 @@ fun SignUpScreen(navController: NavHostController) {
         // Sabeel Connect logo
         Image(
             modifier = Modifier
-                .height(25.dp)
-                .width(104.dp),
+                .height(50.dp)
+                .width(208.dp),
             painter = painterResource(id = R.drawable.sabeel_connect_green_logo_vec),
             contentDescription = null
         )
@@ -121,8 +124,15 @@ fun SignUpScreen(navController: NavHostController) {
             contentAlignment = Alignment.Center
         ) {
             Text(
-                fontSize = 14.sp,
-                fontFamily = FontFamily(Font(R.font.inter_semi_bold)),
+                fontFamily = FontFamily(
+                    Font(R.font.inter_bold)
+                ),
+                fontSize = 22.sp,
+                style = TextStyle(
+                    brush = Brush.linearGradient(
+                        colors = listOf(Color(0xff228B22), Color(0xff556B2F))
+                    )
+                ),
                 text = "Create your Account"
             )
         }
@@ -133,9 +143,10 @@ fun SignUpScreen(navController: NavHostController) {
         // Name text field composable --------------------------------------------------------------
         TextFieldComposable(
             modifier = Modifier
-                .height(51.dp)
-                .width(274.dp)
-                .border(1.dp, placeholder_text, RoundedCornerShape(17.dp)),
+                .height(61.dp)
+                .fillMaxWidth()
+                .border(1.2.dp, placeholder_text, RoundedCornerShape(18.dp))
+                .background(Color(0xffEDEDED), RoundedCornerShape(18.dp)),
             parameter = name,
             placeholder = "Enter your name",
             image = R.drawable.user_leading_icon,
@@ -149,9 +160,10 @@ fun SignUpScreen(navController: NavHostController) {
         // Email text field composable -------------------------------------------------------------
         TextFieldComposable(
             modifier = Modifier
-                .height(51.dp)
-                .width(274.dp)
-                .border(1.dp, placeholder_text, RoundedCornerShape(17.dp)),
+                .height(61.dp)
+                .fillMaxWidth()
+                .border(1.2.dp, placeholder_text, RoundedCornerShape(18.dp))
+                .background(Color(0xffEDEDED), RoundedCornerShape(18.dp)),
             parameter = email,
             placeholder = "Enter your email",
             image = R.drawable.email_leading_icon,
@@ -164,8 +176,8 @@ fun SignUpScreen(navController: NavHostController) {
         // Row begins it will contain the country code and phone number composables --------------------
         Row(
             modifier = Modifier
-                .width(274.dp)
-                .height(51.dp),
+                .fillMaxWidth()
+                .height(61.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             // Country Code DropDown composable ------------------------------------------------------
@@ -184,8 +196,11 @@ fun SignUpScreen(navController: NavHostController) {
             // Currently it is set to full width i.e. 274.dp
             TextField(
                 modifier = Modifier
-                    .width(274.dp)
-                    .border(1.dp, Color(0xff9E9E9E), RoundedCornerShape(17.dp))
+                    .wrapContentHeight(Alignment.CenterVertically)
+                    .height(61.dp)
+                    .fillMaxWidth()
+                    .border(1.2.dp, placeholder_text, RoundedCornerShape(18.dp))
+                    .background(Color(0xffEDEDED), RoundedCornerShape(18.dp))
                     .onFocusChanged() {
                         isSelected.value = !isSelected.value
                         if (isSelected.value && phoneNumber == "")
@@ -205,14 +220,16 @@ fun SignUpScreen(navController: NavHostController) {
                 leadingIcon = {
                      Icon(painter = painterResource(id = R.drawable.phone_leading_icon), contentDescription = null)
                 },
-                textStyle = if (shouldShowPlaceholder.value) {
+                textStyle = if(shouldShowPlaceholder.value) {
                     TextStyle(
-                        fontSize = 12.sp,
-                        color = Color(0xff8c8888)
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xff8c8888),
                     )
                 } else {
                     TextStyle(
                         fontSize = 14.sp,
+                        fontWeight = FontWeight.SemiBold,
                         color = Color.Black
                     )
                 },
@@ -228,9 +245,10 @@ fun SignUpScreen(navController: NavHostController) {
         // by clicking the icon (I have to add icon as well)
         TextFieldComposable(
             modifier = Modifier
-                .height(51.dp)
-                .width(274.dp)
-                .border(1.dp, placeholder_text, RoundedCornerShape(17.dp)),
+                .height(61.dp)
+                .fillMaxWidth()
+                .border(1.2.dp, placeholder_text, RoundedCornerShape(18.dp))
+                .background(Color(0xffEDEDED), RoundedCornerShape(18.dp)),
             parameter = password,
             placeholder = "Password",
             image = R.drawable.password_leading_icon,
@@ -246,9 +264,10 @@ fun SignUpScreen(navController: NavHostController) {
         // Contains the confirm password state varible, confirm_password should be equal to password
         TextFieldComposable(
             modifier = Modifier
-                .height(51.dp)
-                .width(274.dp)
-                .border(1.dp, placeholder_text, RoundedCornerShape(17.dp)),
+                .height(61.dp)
+                .fillMaxWidth()
+                .border(1.2.dp, placeholder_text, RoundedCornerShape(18.dp))
+                .background(Color(0xffEDEDED), RoundedCornerShape(18.dp)),
             parameter = confirmPassword,
             placeholder = "Confirm Password",
             image = R.drawable.password_leading_icon,
@@ -265,7 +284,7 @@ fun SignUpScreen(navController: NavHostController) {
         // Updates state variable buttonClicked, creates a request object and passes it to the viewmodel function.
         Box(
             modifier = Modifier
-                .height(38.dp)
+                .height(55.dp)
                 .width(264.dp)
                 .clickable {
                     buttonClicked = true
@@ -286,9 +305,10 @@ fun SignUpScreen(navController: NavHostController) {
         ) {
             Text(
                 color = Color.White,
-                fontSize = 12.sp,
+                fontSize = 14.sp,
                 fontFamily = FontFamily(Font(R.font.inter_medium)),
-                text = "Sign up"
+                text = "Sign up",
+                fontWeight = FontWeight.SemiBold
             )
         }
 

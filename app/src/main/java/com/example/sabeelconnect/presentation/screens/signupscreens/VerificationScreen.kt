@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -46,6 +47,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -107,7 +109,7 @@ fun VerificationScreen(navController: NavHostController){
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(39.dp),
+                .height(49.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -122,8 +124,8 @@ fun VerificationScreen(navController: NavHostController){
                 Icon(
                     Icons.Filled.ArrowBack, contentDescription = "Back",
                     modifier = Modifier
-                        .height(14.dp)
-                        .width(19.dp)
+                        .height(19.dp)
+                        .width(28.dp)
                         .clickable { navController.navigate("signUpScreen") }
                 )
 
@@ -133,7 +135,7 @@ fun VerificationScreen(navController: NavHostController){
 
             //Text containing Forgot Password
             Text(
-                fontSize = 20.sp,
+                fontSize = 22.sp,
                 fontFamily = FontFamily(Font(R.font.inter_bold)),
                 text = "Verification OTP"
             )
@@ -156,14 +158,17 @@ fun VerificationScreen(navController: NavHostController){
             //Text
             Text(
                 textAlign = TextAlign.Center,
-                fontSize = 13.sp,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold,
                 fontFamily = FontFamily(Font(R.font.inter_medium)),
                 text = "Enter the 6-digit verification code we have sent you on phone number xxxxxxxx01"
             )
 
             // Image
             Image(
-                modifier = Modifier.size(140.dp),
+                modifier = Modifier
+                    .height(165.dp)
+                    .width(153.75.dp),
                 painter = painterResource(id = R.drawable.verification_screen_header_image),
                 contentDescription = null
             )
@@ -172,8 +177,8 @@ fun VerificationScreen(navController: NavHostController){
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight()
-                    .padding(horizontal = 22.dp),
+                    .height(64.dp)
+                    .padding(horizontal = 0.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 //First OTP box
@@ -259,7 +264,12 @@ fun VerificationScreen(navController: NavHostController){
                 .padding(horizontal = 27.dp),
             horizontalArrangement = Arrangement.End
         ) {
-            Text(text = "Resend", fontSize = 12.sp, color = primary_green, fontFamily = FontFamily(Font(R.font.inter_medium)))
+            Text(
+                text = "Resend",
+                fontSize = 14.sp, color = primary_green,
+                fontFamily = FontFamily(Font(R.font.inter_medium)),
+                fontWeight = FontWeight.SemiBold
+            )
         }
 
         Spacer(modifier = Modifier.height(15.dp))
@@ -268,16 +278,22 @@ fun VerificationScreen(navController: NavHostController){
 
         Box(
             modifier = Modifier
-                .height(37.dp)
-                .width(126.dp)
-                .background(primary_green, RoundedCornerShape(17.dp))
+                .height(47.dp)
+                .width(136.dp)
+                .background(primary_green, RoundedCornerShape(19.dp))
                 .clickable {
                     buttonClicked = true
                     verifynumberviewmodel.verify_number(otpList[1] + otpList[2] + otpList[3] + otpList[4] + otpList[5] + otpList[6])
                 },
             contentAlignment = Alignment.Center
         ){
-            Text(text = "Submit", fontSize = 12.sp, fontFamily = FontFamily(Font(R.font.inter_medium)), color = Color.White)
+            Text(
+                text = "Submit",
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold,
+                fontFamily = FontFamily(Font(R.font.inter_medium)),
+                color = Color.White
+            )
         }
 
         // Main column ends here
@@ -312,15 +328,18 @@ fun FocusRequesterTextField(
     // Creating the Text Field
     TextField(
         modifier = Modifier
+            .wrapContentHeight(Alignment.CenterVertically)
             .focusRequester(focusRequester)
-            .width(41.dp)
-            .height(60.dp)
+            .width(46.dp)
+            .height(64.dp)
             .border(1.dp, placeholder_text, RoundedCornerShape(12.dp)),
         value = value,
         onValueChange = {
             myfunction(it)
         },
         textStyle = TextStyle(
+            fontSize = 14.sp,
+            fontWeight = FontWeight.SemiBold,
             color = Color.Black
         ),
         shape = RoundedCornerShape(12.dp),

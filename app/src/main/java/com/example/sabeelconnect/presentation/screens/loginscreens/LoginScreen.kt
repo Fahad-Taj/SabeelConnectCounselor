@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -85,40 +86,45 @@ fun LoginScreen(navController: NavHostController){
         modifier = Modifier
             .fillMaxSize()
             .background(brush = my_gradient)
-            .padding(top = 84.dp, bottom = 0.dp, start = 43.dp, end = 43.dp),
+            .padding(top = 95.dp, bottom = 0.dp, start = 43.dp, end = 43.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
 
         // Logo present at the top -----------------------------------------------------------------
         Image(
             modifier = Modifier
-                .width(104.dp)
-                .height(25.dp),
+                .width(208.dp)
+                .height(50.dp),
             painter = painterResource(id = R.drawable.sabeel_connect_green_logo_vec),
             contentDescription = null
         )
 
-        Spacer(modifier = Modifier.height(35.dp))
+        Spacer(modifier = Modifier.height(45.dp))
 
         // Welcome Text ----------------------------------------------------------------------------
         Text(
             fontFamily = FontFamily(
-                Font(R.font.inter_medium)
+                Font(R.font.inter_bold)
             ),
             text = "Welcome Back!",
-            fontSize = 20.sp,
+            fontSize = 30.sp,
+            style = TextStyle(
+                brush = Brush.linearGradient(
+                    colors = listOf(Color(0xff228B22), Color(0xff556B2F))
+                )
+            )
         )
 
-        Spacer(modifier = Modifier.height(67.dp))
+        Spacer(modifier = Modifier.height(70.dp))
 
         // Name TextField --------------------------------------------------------------------------
         // Contains the name state variable
         TextFieldComposable(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(51.dp)
-                .border(1.5.dp, placeholder_text, RoundedCornerShape(17.dp))
-                .background(Color(0xffEDEDED), RoundedCornerShape(17.dp)),
+                .height(61.dp)
+                .border(1.2.dp, placeholder_text, RoundedCornerShape(18.dp))
+                .background(Color(0xffEDEDED), RoundedCornerShape(18.dp)),
             parameter = name,
             placeholder = "Enter your name",
             image = R.drawable.user_leading_icon,
@@ -133,8 +139,8 @@ fun LoginScreen(navController: NavHostController){
         TextFieldComposable(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(51.dp)
-                .border(1.5.dp, placeholder_text, RoundedCornerShape(17.dp))
+                .height(61.dp)
+                .border(1.2.dp, placeholder_text, RoundedCornerShape(17.dp))
                 .background(Color(0xffEDEDED), RoundedCornerShape(17.dp)),
             parameter = password,
             placeholder = "Enter your password",
@@ -157,22 +163,22 @@ fun LoginScreen(navController: NavHostController){
                 text = "Forgot Password?",
                 modifier = Modifier.clickable { navController.navigate("forgotPasswordScreen") },
                 color = primary_green,
-                fontSize = 12.sp,
+                fontSize = 14.sp,
                 fontFamily = FontFamily(
-                    Font(R.font.inter_light)
+                    Font(R.font.inter_medium)
                 ),
-                fontWeight = FontWeight(400)
+                fontWeight = FontWeight.SemiBold
             )
         }
 
-        Spacer(modifier = Modifier.height(21.dp))
+        Spacer(modifier = Modifier.height(31.dp))
 
         // Login Button ----------------------------------------------------------------------------
         // Clicking on this button will call the viewmodel function to hit api endpoint will our data.
         Button(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(38.dp)
+                .height(48.dp)
                 .clip(RoundedCornerShape(27.dp)),
             onClick = {
                 if(name != "" && password != ""){
@@ -186,8 +192,8 @@ fun LoginScreen(navController: NavHostController){
         ) {
             Text(
                 text = "Log in",
-                fontSize = 12.sp,
-                fontWeight = FontWeight(400),
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold,
                 color = Color.White,
                 fontFamily = FontFamily(
                     Font(R.font.inter_medium)
@@ -195,7 +201,7 @@ fun LoginScreen(navController: NavHostController){
             )
         }
 
-        Spacer(modifier = Modifier.height(45.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
         // OR Text wrapped inside a box
         Box(
@@ -206,28 +212,29 @@ fun LoginScreen(navController: NavHostController){
         ){
             Text(
                 fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
                 color = primary_green,
                 fontFamily = FontFamily(Font(R.font.inter_medium)),
                 text = "OR"
             )
         }
 
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(45.dp))
 
         //Row containing the buttons of Google and Facebook Login options
 
         Row(
             modifier = Modifier
-                .height(51.dp)
-                .width(148.dp),
+                .height(61.dp)
+                .width(170.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             // Two Clickable Boxes containing images
             Box(
                 modifier = Modifier
                     .background(Color.White, RoundedCornerShape(10.dp))
-                    .height(50.dp)
-                    .width(50.dp)
+                    .height(60.dp)
+                    .width(60.dp)
                     .border(1.dp, primary_green, RoundedCornerShape(10.dp))
                     .clickable { },
                 contentAlignment = Alignment.Center,
@@ -239,8 +246,8 @@ fun LoginScreen(navController: NavHostController){
             Box(
                 modifier = Modifier
                     .background(Color.White, RoundedCornerShape(10.dp))
-                    .height(50.dp)
-                    .width(50.dp)
+                    .height(60.dp)
+                    .width(60.dp)
                     .border(1.dp, primary_green, RoundedCornerShape(10.dp))
                     .clickable { },
                 contentAlignment = Alignment.Center
@@ -251,21 +258,23 @@ fun LoginScreen(navController: NavHostController){
 
         // Row containing login options end here
 
-        Spacer(modifier = Modifier.height(87.dp))
+        Spacer(modifier = Modifier.height(65.dp))
 
         //Create Account button
 
         Box(
             modifier = Modifier
-                .height(38.dp)
+                .height(48.dp)
                 .width(264.dp)
                 .background(secondary_green, RoundedCornerShape(27.dp))
                 .border(1.dp, primary_green, RoundedCornerShape(27.dp))
+                .clip(RoundedCornerShape(27.dp))
                 .clickable { navController.navigate(SIGNUP_GRAPH_ROUTE) },
             contentAlignment = Alignment.Center
         ){
             Text(
-                fontSize = 12.sp,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold,
                 fontFamily = FontFamily(Font(R.font.inter_medium)),
                 text = "Create an account",
                 color = primary_green
@@ -281,7 +290,10 @@ fun LoginScreen(navController: NavHostController){
             if(response?.isSuccessful != true && buttonClicked){
                 Text(text = "Invalid credentials", fontSize = 12.sp, color = Color.Red)
             } else if(response?.isSuccessful == true && buttonClicked){
-                navController.navigate(MAIN_SCREEN_ROUTE)
+                navController.navigate(MAIN_SCREEN_ROUTE){
+                    popUpTo(com.example.sabeelconnect.presentation.screens.LoginSignUpScreen.SplashScreen.route){ inclusive = true }
+                }
+
             } else{
 
             }

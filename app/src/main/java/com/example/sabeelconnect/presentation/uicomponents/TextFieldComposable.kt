@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,7 +28,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sabeelconnect.R
@@ -59,7 +62,9 @@ fun TextFieldComposable(
         ){
 
         TextField(
-            modifier = modifier.onFocusChanged {
+            modifier = modifier
+                .wrapContentHeight(Alignment.CenterVertically)
+                .onFocusChanged {
                 isSelected.value = !isSelected.value
                 if(isSelected.value && parameter == "")
                     shouldShowPlaceholder.value = true
@@ -80,19 +85,21 @@ fun TextFieldComposable(
             ),
             textStyle = if(shouldShowPlaceholder.value) {
                 TextStyle(
-                    fontSize = 12.sp,
-                    color = Color(0xff8c8888)
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color(0xff8c8888),
                 )
             } else {
                 TextStyle(
                     fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
             },
             shape = RoundedCornerShape(17.dp),
             keyboardOptions = keyboardOptions,
             visualTransformation = if(!(isSelected.value && parameter == "") && visualTransformation != null && togglePasswordVisualTransformation.value) visualTransformation else VisualTransformation.None,
-
+            singleLine = true
         )
 
     }
