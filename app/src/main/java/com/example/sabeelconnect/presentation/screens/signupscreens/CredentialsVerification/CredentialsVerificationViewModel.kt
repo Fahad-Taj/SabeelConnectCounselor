@@ -1,13 +1,11 @@
-package com.example.sabeelconnect.presentation.screens.signupscreens
+package com.example.sabeelconnect.presentation.screens.signupscreens.CredentialsVerification
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sabeelconnect.api.RetrofitInstance
 import com.example.sabeelconnect.api.access_token
 import com.example.sabeelconnect.models.CredentialsVerification.IdDocumentResponse
-import com.example.sabeelconnect.models.SignUp.SignupResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

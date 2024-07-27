@@ -4,15 +4,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.sabeelconnect.presentation.screens.LoginSignUpScreen
-import com.example.sabeelconnect.presentation.screens.SIGNUP_GRAPH_ROUTE
-import com.example.sabeelconnect.presentation.screens.signupscreens.CredentialsVerificationScreen
-import com.example.sabeelconnect.presentation.screens.signupscreens.SignUpScreen
-import com.example.sabeelconnect.presentation.screens.signupscreens.UserProfileScreen
-import com.example.sabeelconnect.presentation.screens.signupscreens.VerificationScreen
+import com.example.sabeelconnect.presentation.screens.signupscreens.CredentialsVerification.CredentialsVerificationScreen
+import com.example.sabeelconnect.presentation.screens.signupscreens.SignUp.SignUpScreen
+import com.example.sabeelconnect.presentation.screens.signupscreens.CounselorProfile.UserProfileScreen
+import com.example.sabeelconnect.presentation.screens.signupscreens.VerifyNumber.VerificationScreen
 
 fun NavGraphBuilder.signUpGraph(navController: NavHostController){
-    navigation(startDestination = com.example.sabeelconnect.presentation.screens.LoginSignUpScreen.UserProfileScreen.route, route = com.example.sabeelconnect.presentation.screens.SIGNUP_GRAPH_ROUTE){
+    navigation(startDestination = com.example.sabeelconnect.presentation.screens.LoginSignUpScreen.SignUpScreen.route, route = com.example.sabeelconnect.presentation.screens.SIGNUP_GRAPH_ROUTE){
         composable(com.example.sabeelconnect.presentation.screens.LoginSignUpScreen.SignUpScreen.route){
             SignUpScreen(navController = navController)
         }

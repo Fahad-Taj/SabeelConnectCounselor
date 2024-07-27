@@ -1,4 +1,4 @@
-package com.example.sabeelconnect.presentation.screens.signupscreens
+package com.example.sabeelconnect.presentation.screens.signupscreens.CredentialsVerification
 
 import android.content.Context
 import android.net.Uri

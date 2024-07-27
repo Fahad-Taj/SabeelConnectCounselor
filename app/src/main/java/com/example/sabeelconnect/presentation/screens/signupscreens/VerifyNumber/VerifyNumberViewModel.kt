@@ -1,6 +1,7 @@
-package com.example.sabeelconnect.presentation.screens.signupscreens
+package com.example.sabeelconnect.presentation.screens.signupscreens.VerifyNumber
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sabeelconnect.api.RetrofitInstance
@@ -17,8 +18,11 @@ class VerifyNumberViewModel: ViewModel(){
     private val _response = MutableStateFlow<Response<VerifyNumberResponse>?>(null)
     val response: StateFlow<Response<VerifyNumberResponse>?> = _response
 
+    var awaitingResponse = mutableStateOf(false)
+
     fun verify_number(otp: String) {
         viewModelScope.launch {
+            awaitingResponse.value = true
             try {
                 val bearerToken = "Bearer $access_token"
                 val result = RetrofitInstance.api.verifynumber(bearerToken, VerifyNumberRequest(otp))
@@ -35,6 +39,7 @@ class VerifyNumberViewModel: ViewModel(){
             catch (e: Exception) {
                 // Handle exception
             }
+            awaitingResponse.value = false
         }
     }
 

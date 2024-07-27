@@ -4,10 +4,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.sabeelconnect.presentation.screens.LOGIN_GRAPH_ROUTE
-import com.example.sabeelconnect.presentation.screens.LoginSignUpScreen
 import com.example.sabeelconnect.presentation.screens.loginscreens.ForgotPasswordScreen
-import com.example.sabeelconnect.presentation.screens.loginscreens.LoginScreen
+import com.example.sabeelconnect.presentation.screens.loginscreens.Login.LoginScreen
 import com.example.sabeelconnect.presentation.screens.loginscreens.SplashScreen
 
 fun NavGraphBuilder.loginGraph(

@@ -1,4 +1,4 @@
-package com.example.sabeelconnect.presentation.screens.signupscreens
+package com.example.sabeelconnect.presentation.screens.signupscreens.VerifyNumber
 
 import android.util.Log
 import android.widget.Toast
@@ -16,11 +16,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -276,31 +276,45 @@ fun VerificationScreen(navController: NavHostController){
 
         //Submit button in form of a box
 
+        val isAwaiting by verifynumberviewmodel.awaitingResponse
+        var color by remember { mutableStateOf(primary_green) }
+        var isClickable by remember { mutableStateOf(true) }
+        if (!isAwaiting){
+            color = primary_green
+            isClickable = true
+        } else {
+            color = placeholder_text
+            isClickable = false
+        }
         Box(
             modifier = Modifier
                 .height(47.dp)
                 .width(136.dp)
-                .background(primary_green, RoundedCornerShape(19.dp))
-                .clickable {
+                .background(color, RoundedCornerShape(19.dp))
+                .clickable(enabled = isClickable) {
                     buttonClicked = true
                     verifynumberviewmodel.verify_number(otpList[1] + otpList[2] + otpList[3] + otpList[4] + otpList[5] + otpList[6])
                 },
             contentAlignment = Alignment.Center
         ){
-            Text(
-                text = "Submit",
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold,
-                fontFamily = FontFamily(Font(R.font.inter_medium)),
-                color = Color.White
-            )
+            if(!isAwaiting){
+                Text(
+                    text = "Submit",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    fontFamily = FontFamily(Font(R.font.inter_medium)),
+                    color = Color.White
+                )
+            } else {
+                CircularProgressIndicator(color = Color.White)
+            }
         }
 
         // Main column ends here
 
         LaunchedEffect(response) {
             response?.let {
-                Toast.makeText(context, response!!.message().toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, response!!.body()?.message.toString(), Toast.LENGTH_SHORT).show()
                 Log.e("Verification Response", it.message().toString())
                 Log.e("Verification Response", it.body().toString())
                 Log.e("Verification Response", it.errorBody()?.string().toString())
