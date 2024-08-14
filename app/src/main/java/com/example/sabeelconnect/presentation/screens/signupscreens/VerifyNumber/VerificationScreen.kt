@@ -58,7 +58,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.sabeelconnect.R
-import com.example.sabeelconnect.presentation.screens.LoginSignUpScreen
+import com.example.sabeelconnect.presentation.screens.loginscreens.LoginSignUpScreen
 import com.example.sabeelconnect.presentation.ui.theme.placeholder_text
 import com.example.sabeelconnect.presentation.ui.theme.primary_green
 

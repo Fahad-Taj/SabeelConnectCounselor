@@ -1,26 +1,24 @@
 package com.example.sabeelconnect.presentation.navigation
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.example.sabeelconnect.presentation.screens.CHATS_NAV_GRAPH_ROUTE
-import com.example.sabeelconnect.presentation.screens.ChatScreen
-import com.example.sabeelconnect.presentation.screens.topscreens.AllScreen
-import com.example.sabeelconnect.presentation.screens.topscreens.GroupScreen
-import com.example.sabeelconnect.presentation.screens.topscreens.RequestedScreen
+import com.example.sabeelconnect.presentation.screens.chatscreens.AllScreen
+import com.example.sabeelconnect.presentation.screens.chatscreens.CHATS_NAV_GRAPH_ROUTE
+import com.example.sabeelconnect.presentation.screens.chatscreens.ChatScreen
+import com.example.sabeelconnect.presentation.screens.chatscreens.GroupScreen
+import com.example.sabeelconnect.presentation.screens.chatscreens.RequestedScreen
 
 @Composable
 fun ChatsNavGraph(rootNavController: NavHostController, chatNavController: NavHostController){
     NavHost(
         navController = chatNavController,
-        startDestination = com.example.sabeelconnect.presentation.screens.ChatScreen.All.route,
-        route = com.example.sabeelconnect.presentation.screens.CHATS_NAV_GRAPH_ROUTE
+        startDestination = ChatScreen.All.route,
+        route = CHATS_NAV_GRAPH_ROUTE
     ) {
-        composable(com.example.sabeelconnect.presentation.screens.ChatScreen.All.route){ AllScreen(rootNavController = rootNavController, chatNavController = chatNavController) }
-        composable(com.example.sabeelconnect.presentation.screens.ChatScreen.Group.route){ GroupScreen(rootNavController = rootNavController, chatNavController = chatNavController) }
-        composable(com.example.sabeelconnect.presentation.screens.ChatScreen.Requested.route){ RequestedScreen(rootNavController = rootNavController, chatNavController = chatNavController) }
+        composable(ChatScreen.All.route){ AllScreen(rootNavController = rootNavController, chatNavController = chatNavController) }
+        composable(ChatScreen.Group.route){ GroupScreen(rootNavController = rootNavController, chatNavController = chatNavController) }
+        composable(ChatScreen.Requested.route){ RequestedScreen(rootNavController = rootNavController, chatNavController = chatNavController) }
     }
 }

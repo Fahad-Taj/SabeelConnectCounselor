@@ -1,4 +1,4 @@
-package com.example.sabeelconnect.presentation.screens.loginscreens
+package com.example.sabeelconnect.presentation.screens.loginscreens.ForgotPassword
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

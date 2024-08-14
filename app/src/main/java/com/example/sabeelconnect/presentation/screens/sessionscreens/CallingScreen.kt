@@ -32,15 +32,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sabeelconnect.R
-import com.example.sabeelconnect.presentation.screens.SessionScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -114,7 +111,7 @@ fun CallingScreen(navController: NavHostController){
                         .size(60.dp)
                         .clip(CircleShape)
                         .background(Color(0xff32B06C), CircleShape)
-                        .clickable { navController.navigate(com.example.sabeelconnect.presentation.screens.SessionScreen.AnsweringCallScreen.route) },
+                        .clickable { navController.navigate(SessionScreen.AnsweringCallScreen.route) },
                     contentAlignment = Alignment.Center
                 ){
                     Icon(

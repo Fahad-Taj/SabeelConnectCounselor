@@ -41,8 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sabeelconnect.R
-import com.example.sabeelconnect.presentation.screens.SIGNUP_GRAPH_ROUTE
-import com.example.sabeelconnect.presentation.screens.signupscreens.CounselorProfile.SabeelBasicTextStyle
+import com.example.sabeelconnect.presentation.screens.loginscreens.LoginSignUpScreen
 import com.example.sabeelconnect.presentation.ui.theme.placeholder_text
 import com.example.sabeelconnect.presentation.ui.theme.primary_green
 import com.example.sabeelconnect.presentation.ui.theme.secondary_green
@@ -244,7 +243,7 @@ fun CreateAccountButton(navController: NavHostController){
             .background(secondary_green, RoundedCornerShape(27.dp))
             .border(1.dp, primary_green, RoundedCornerShape(27.dp))
             .clip(RoundedCornerShape(27.dp))
-            .clickable { navController.navigate(SIGNUP_GRAPH_ROUTE) },
+            .clickable { navController.navigate(LoginSignUpScreen.SignUpScreen.route) },
         contentAlignment = Alignment.Center
     ){
         Text(

@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -45,7 +44,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sabeelconnect.R
-import com.example.sabeelconnect.presentation.screens.SessionScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -136,8 +134,8 @@ fun AnsweringCallScreen(navController: NavHostController){
                             .size(40.dp)
                             .clip(CircleShape)
                             .background(Color(0xffF71A1A), CircleShape)
-                            .clickable { navController.navigate(com.example.sabeelconnect.presentation.screens.SessionScreen.AcceptedScreen.route) {
-                                popUpTo(com.example.sabeelconnect.presentation.screens.SessionScreen.AcceptedScreen.route) {
+                            .clickable { navController.navigate(SessionScreen.AcceptedScreen.route) {
+                                popUpTo(SessionScreen.AcceptedScreen.route) {
                                     inclusive = true
                                 }
                             } },

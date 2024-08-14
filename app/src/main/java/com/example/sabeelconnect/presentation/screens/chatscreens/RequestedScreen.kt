@@ -1,6 +1,5 @@
-package com.example.sabeelconnect.presentation.screens.topscreens
+package com.example.sabeelconnect.presentation.screens.chatscreens
 
-import android.widget.Space
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -9,7 +8,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,8 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sabeelconnect.R
-import com.example.sabeelconnect.presentation.screens.ChatScreen
-import com.example.sabeelconnect.presentation.screens.SESSION_SCREEN_NAV_GRAPH_ROUTE
+import com.example.sabeelconnect.presentation.screens.sessionscreens.SESSION_SCREEN_NAV_GRAPH_ROUTE
 
 @Composable
 fun RequestedScreen(rootNavController: NavHostController, chatNavController: NavHostController){
@@ -94,7 +91,7 @@ fun AddRequestedMainBoxItem(rootNavController: NavHostController, chatNavControl
                         .clip(RoundedCornerShape(8.dp))
                         .background(Color(0xffefefef))
                         .border(1.dp, Color(0xff7b7b7b), RoundedCornerShape(8.dp))
-                        .clickable { rootNavController.navigate(com.example.sabeelconnect.presentation.screens.SESSION_SCREEN_NAV_GRAPH_ROUTE) },
+                        .clickable { rootNavController.navigate(SESSION_SCREEN_NAV_GRAPH_ROUTE) },
                     contentAlignment = Alignment.Center
                     ){
                     Text(text = "Requested", fontSize = 8.sp)

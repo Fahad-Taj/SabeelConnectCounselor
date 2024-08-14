@@ -1,14 +1,12 @@
-package com.example.sabeelconnect.presentation.screens.topscreens
+package com.example.sabeelconnect.presentation.screens.chatscreens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -36,7 +34,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.sabeelconnect.R
 import com.example.sabeelconnect.presentation.navigation.ChatsNavGraph
-import com.example.sabeelconnect.presentation.screens.ChatScreen
 import com.example.sabeelconnect.presentation.ui.theme.PrimaryGreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -96,9 +93,9 @@ fun TopNavBar(navController: NavHostController){
         verticalAlignment = Alignment.CenterVertically
     ) {
         val screens = listOf(
-            com.example.sabeelconnect.presentation.screens.ChatScreen.All,
-            com.example.sabeelconnect.presentation.screens.ChatScreen.Requested,
-            com.example.sabeelconnect.presentation.screens.ChatScreen.Group
+            ChatScreen.All,
+            ChatScreen.Requested,
+            ChatScreen.Group
         )
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -124,7 +121,7 @@ fun TopNavBar(navController: NavHostController){
 
 @Composable
 fun TopNavElement(
-    screen: com.example.sabeelconnect.presentation.screens.ChatScreen,
+    screen: ChatScreen,
     currentDestination: NavDestination?,
     navController: NavHostController,
     width: Float

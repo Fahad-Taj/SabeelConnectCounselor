@@ -38,9 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sabeelconnect.R
-import com.example.sabeelconnect.presentation.screens.SessionScreen
 import com.example.sabeelconnect.presentation.ui.theme.PrimaryGreen
-import org.w3c.dom.Text
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -92,7 +90,7 @@ fun AcceptanceScreen(navController: NavHostController){
                         navController.popBackStack()
                     })
                     ButtonBox(color = Color(0xff1EBA2E), value = "Accept") {
-                        navController.navigate(com.example.sabeelconnect.presentation.screens.SessionScreen.AcceptedScreen.route)
+                        navController.navigate(SessionScreen.AcceptedScreen.route)
                     }
                 }
             }
@@ -177,7 +175,7 @@ fun SessionTopAppBar(navController: NavHostController, bool: Boolean){
             Row(modifier = Modifier.padding(end = 15.dp)) {
                 Icon(modifier = Modifier
                     .size(17.dp)
-                    .clickable { navController.navigate(com.example.sabeelconnect.presentation.screens.SessionScreen.CallingScreen.route) }, imageVector = Icons.Filled.Call, contentDescription = null, tint = Color.White)
+                    .clickable { navController.navigate(SessionScreen.CallingScreen.route) }, imageVector = Icons.Filled.Call, contentDescription = null, tint = Color.White)
             }
         } else {
             Row(modifier = Modifier.padding(end = 15.dp)) {
