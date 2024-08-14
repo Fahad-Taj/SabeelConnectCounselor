@@ -27,6 +27,7 @@ class UserProfileViewModel : ViewModel() {
     // Personal details
     var name = mutableStateOf("")
     var phoneNumber = mutableStateOf("")
+
     var email = mutableStateOf("")
     var gender = mutableStateOf("Male")
 
@@ -56,12 +57,13 @@ class UserProfileViewModel : ViewModel() {
 
     // Coroutine variables
     // Used to check if the name, email and phone number are loading from api endpoint
-    var isLoading = mutableStateOf(true)
+    var _isLoading = MutableStateFlow(true)
+    var isLoading: StateFlow<Boolean> = _isLoading
 
     // Used to check the status of the request that is sent to the api endpoint
     var awaitingResponse = mutableStateOf(false)
 
-    // Temporary function used to simulate network request
+    // Sends api request for completing the counselor profile
     fun submitButtonClicked(){
         viewModelScope.launch {
             awaitingResponse.value = true
@@ -88,6 +90,23 @@ class UserProfileViewModel : ViewModel() {
             }
             awaitingResponse.value = false
         }
+    }
+
+    // Sends api request to get the basic details of counselor
+    fun get_counselor_info(){
+        val bearer_token = "Bearer $access_token"
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                val result = RetrofitInstance.api.get_counselor_info(bearer_token)
+                name.value = result.body()?.data?.user?.username.toString()
+                phoneNumber.value = result.body()?.data?.user?.mobile_number.toString()
+            } catch(e: Exception){
+                e.printStackTrace()
+            }
+            _isLoading.value = false
+        }
+
     }
 
 }

@@ -31,7 +31,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -186,7 +188,15 @@ fun ProfileHeader(){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonalInfo(viewModel: UserProfileViewModel){
+
+    val isLoading by viewModel.isLoading.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.get_counselor_info()
+    }
+
     // Main Column
+
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -210,7 +220,10 @@ fun PersonalInfo(viewModel: UserProfileViewModel){
                 BasicUserProfileTextField(
                     label = "Name",
                     value = viewModel.name,
-                    function = { viewModel.updateState(viewModel.name,it) }
+                    function = {
+                        // viewModel.updateState(viewModel.name,it)
+                     },
+                    isLoading = isLoading
                 )
                 Spacer(modifier = Modifier.height(10.dp))
 
@@ -218,7 +231,10 @@ fun PersonalInfo(viewModel: UserProfileViewModel){
                 BasicUserProfileTextField(
                     label = "Phone Number",
                     value = viewModel.phoneNumber,
-                    function = { viewModel.updateState(viewModel.phoneNumber,it) }
+                    function = {
+                        //viewModel.updateState(viewModel.phoneNumber,it)
+                    },
+                    isLoading = isLoading
                 )
                 Spacer(modifier = Modifier.height(10.dp))
 

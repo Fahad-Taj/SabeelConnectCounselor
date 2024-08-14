@@ -63,6 +63,4 @@ interface SabeelApi {
     suspend fun get_counselor_info(
         @Header("Authorization") token: String?
     ): Response<GetCounselorInfoResponse>
-
-
 }

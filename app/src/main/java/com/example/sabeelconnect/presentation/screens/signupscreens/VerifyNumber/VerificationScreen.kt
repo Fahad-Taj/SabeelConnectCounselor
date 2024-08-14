@@ -38,6 +38,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
@@ -290,6 +291,7 @@ fun VerificationScreen(navController: NavHostController){
             modifier = Modifier
                 .height(47.dp)
                 .width(136.dp)
+                .clip(RoundedCornerShape(19.dp))
                 .background(color, RoundedCornerShape(19.dp))
                 .clickable(enabled = isClickable) {
                     buttonClicked = true

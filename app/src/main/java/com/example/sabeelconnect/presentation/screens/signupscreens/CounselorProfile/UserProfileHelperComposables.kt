@@ -63,38 +63,44 @@ fun BasicUserProfileTextField(
     label: String,
     value: MutableState<String>,
     function: (String) -> Unit,
-    keyboardOptions: KeyboardOptions? = null
+    keyboardOptions: KeyboardOptions? = null,
+    isLoading: Boolean? = null,
 ) {
     // Text Field
-    TextField(
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(0.6.dp, placeholder_text, RoundedCornerShape(15.dp))
-            .clip(RoundedCornerShape(15.dp)),
-        label = {
-            Text(
-                text = label,
-                color = placeholder_text,
-                fontSize = 12.sp,
+    if(isLoading == true){
+        CircularProgressIndicator()
+    } else {
+        TextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(0.6.dp, placeholder_text, RoundedCornerShape(15.dp))
+                .clip(RoundedCornerShape(15.dp)),
+            label = {
+                Text(
+                    text = label,
+                    color = placeholder_text,
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Normal,
+                    fontFamily = FontFamily(Font(R.font.inter_medium))
+                )
+            },
+            value = value.value,
+            onValueChange = { function(it) },
+            colors = TextFieldDefaults.textFieldColors(
+                containerColor = Color.White,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
+            ),
+            textStyle = TextStyle(
+                fontSize = 15.sp,
                 fontWeight = FontWeight.Normal,
-                fontFamily = FontFamily(Font(R.font.inter_medium))
-            )
-        },
-        value = value.value,
-        onValueChange = { function(it) },
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.White,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        ),
-        textStyle = TextStyle(
-            fontSize = 15.sp,
-            fontWeight = FontWeight.Normal,
-            fontFamily = FontFamily(Font(R.font.inter_medium)),
-            color = Color.Black
-        ),
-        keyboardOptions = keyboardOptions ?: KeyboardOptions(keyboardType = KeyboardType.Text)
-    )
+                fontFamily = FontFamily(Font(R.font.inter_medium)),
+                color = Color.Black
+            ),
+            keyboardOptions = keyboardOptions ?: KeyboardOptions(keyboardType = KeyboardType.Text)
+        )
+    }
+
 }
 
 @Composable
@@ -204,7 +210,7 @@ fun SubmitButton(
             response?.let {
                 if(response?.isSuccessful == true){
                     navController.navigate(com.example.sabeelconnect.presentation.screens.LoginSignUpScreen.CredentialsVerificationScreen.route)
-                    Toast.makeText(context, response?.body()?.message.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, response?.message()?.toString(), Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(context, response?.message().toString(), Toast.LENGTH_SHORT).show()
                 }

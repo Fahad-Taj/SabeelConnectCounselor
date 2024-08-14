@@ -23,6 +23,17 @@ class CredentialsVerificationViewModel : ViewModel(){
     private val _response2 = MutableStateFlow<Response<IdDocumentResponse>?>(null)
     val response2: StateFlow<Response<IdDocumentResponse>?> = _response2
 
+    fun isBinaryFile(file: File): Boolean {
+        val buffer = ByteArray(8000) // Read the first 8000 bytes
+        file.inputStream().use {
+            it.read(buffer)
+        }
+        return buffer.any { byte ->
+            byte < 0x09.toByte() || (byte in 0x0E.toByte()..0x1F.toByte() && byte != 0x1B.toByte())
+        }
+    }
+
+
     fun IdUpload(file: File){
         viewModelScope.launch {
             try {
@@ -32,6 +43,11 @@ class CredentialsVerificationViewModel : ViewModel(){
                 multipartBodyBuilder.addFormDataPart("id_document", file.name,
                     file.asRequestBody("multipart/form-data".toMediaTypeOrNull()))
 
+                if (isBinaryFile(file)) {
+                    Log.e("is Binary?, id upload","The file is binary.")
+                } else {
+                    println("The file is text.")
+                }
                 val result = RetrofitInstance.api.id_document(bearerToken, multipartBodyBuilder.build())
                 _response1.value = result
                 Log.e("Id 1", file.absolutePath)
@@ -52,6 +68,12 @@ class CredentialsVerificationViewModel : ViewModel(){
                 multipartBodyBuilder.addFormDataPart("qual_document", file.name,
                     file.asRequestBody("multipart/form-data".toMediaTypeOrNull()))
                 Log.e("Token", bearerToken)
+
+                if (isBinaryFile(file)) {
+                    Log.e("is Binary?, qual upload","The file is binary.")
+                } else {
+                    println("The file is text.")
+                }
 
                 val result = RetrofitInstance.api.qual_document(bearerToken, multipartBodyBuilder.build())
 
